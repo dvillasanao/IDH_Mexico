@@ -1,0 +1,30 @@
+---
+title: "Cálculo del Índice del Desarrollo Humano (IDH) 2020"
+subtitle: "Programa de las Naciones Unidas para el Desarrollo (PNUD) en México"
+author: "Diana Villasana Ocampo"
+output:
+   html_document:
+      code_folding: hide
+      css: "../style.css"
+      highlight: tango
+      theme: flatly
+      toc: yes
+      toc_depth: 2
+      toc_float:
+        collapsed: yes
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, cache.lazy = FALSE, 
+                         eval = FALSE, class.source = "fold-show")
+knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
+options(digits = 2, encoding = "UTF8")
+```
+
+```{r, echo=FALSE}
+rm(list = ls())
+```
+
+```{r, echo=FALSE}
+setwd(here::here())
+```
