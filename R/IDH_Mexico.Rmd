@@ -338,3 +338,58 @@ base_II2020 <- II_2020 %>%
 
 
 ## Cálculo del Subíndice de Salud 2020    
+
+
+### Paso 1. Valores máximos y mínimos de referencia: 
+
+```{r}
+tmi_minima = 1.54 
+tmi_maxima = 80.10 
+```
+
+### Paso 2. acomodo de las bases de datos para el cálculo de la Tasa de Mortalidad Infantil (TMI). 
+
+```{r}
+TMI_20<- read_excel(paste0(here::here(), "/Bases/TMI2020_CONAPO.xlsx"), sheet = 1) %>% 
+          mutate(TMI_2020 = as.numeric(TMI_2020))
+```
+
+**NOTA:** Las poblaciones utilizadas para el cálculo de este subíndice corresponden a las estimaciones de CONAPO, que contiene algunas diferencias con respecto a la publicadas por INEGI en el Censo de Población y Vivienda 2020
+
+```{r}
+POB20 <- read_excel(paste0(here::here(), "/Bases/Población 2020 (CONAPO).xlsx")) %>% 
+          mutate(CVEGEO = sprintf("%05d", CVEGEO)) %>% 
+           select(CVEGEO, poblacion2020)
+```
+
+### Regionalización 
+
+```{r}
+# cálculo de las poblaciones por región en Oaxaca
+regs_oax <- read_excel(paste0(here::here(), "/Bases/Regionalizacion_OAX.xlsx")) %>% 
+             mutate(CVEGEO = sprintf("%05d", CVEGEO))
+```
+
+```{r}
+POB_20regs <- POB20 %>%  
+               mutate(CVE_ENT = substr(CVEGEO, 1, 2)) %>% 
+                filter(CVE_ENT == "20") %>% 
+                 left_join(., regs_oax) %>% 
+                  group_by(CVE_DIST, NOM_DIST) %>% 
+                   summarise(poblacion2020 = sum(poblacion2020)) %>% 
+                    mutate(CVEGEO = as.character(CVE_DIST))
+```
+
+```{r}
+TMI_20 <- TMI_20 %>% 
+           left_join(., POB20, by = "CVEGEO") %>% 
+            rename(POB_2020 = poblacion2020) %>% 
+             left_join(.,POB_20regs) %>% 
+              mutate(POB_2020 = ifelse(is.na(POB_2020), poblacion2020, POB_2020)) %>% 
+               select(-contains("DIST"), -poblacion2020)
+```
+
+
+
+
+

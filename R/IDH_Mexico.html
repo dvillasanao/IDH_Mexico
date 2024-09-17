@@ -1895,6 +1895,43 @@ conversión de PPA con respecto al dólar estadounidense,</strong></p>
 </div>
 <div id="cálculo-del-subíndice-de-salud-2020" class="section level2">
 <h2>Cálculo del Subíndice de Salud 2020</h2>
+<div id="paso-1.-valores-máximos-y-mínimos-de-referencia" class="section level3">
+<h3>Paso 1. Valores máximos y mínimos de referencia:</h3>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>tmi_minima <span class="ot">=</span> <span class="fl">1.54</span> </span>
+<span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>tmi_maxima <span class="ot">=</span> <span class="fl">80.10</span> </span></code></pre></div>
+</div>
+<div id="paso-2.-acomodo-de-las-bases-de-datos-para-el-cálculo-de-la-tasa-de-mortalidad-infantil-tmi." class="section level3">
+<h3>Paso 2. acomodo de las bases de datos para el cálculo de la Tasa de
+Mortalidad Infantil (TMI).</h3>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>TMI_20<span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/TMI2020_CONAPO.xlsx&quot;</span>), <span class="at">sheet =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">TMI_2020 =</span> <span class="fu">as.numeric</span>(TMI_2020))</span></code></pre></div>
+<p><strong>NOTA:</strong> Las poblaciones utilizadas para el cálculo de
+este subíndice corresponden a las estimaciones de CONAPO, que contiene
+algunas diferencias con respecto a la publicadas por INEGI en el Censo
+de Población y Vivienda 2020</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>POB20 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/Población 2020 (CONAPO).xlsx&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">CVEGEO =</span> <span class="fu">sprintf</span>(<span class="st">&quot;%05d&quot;</span>, CVEGEO)) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>           <span class="fu">select</span>(CVEGEO, poblacion2020)</span></code></pre></div>
+</div>
+<div id="regionalización" class="section level3">
+<h3>Regionalización</h3>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># cálculo de las poblaciones por región en Oaxaca</span></span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>regs_oax <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/Regionalizacion_OAX.xlsx&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>             <span class="fu">mutate</span>(<span class="at">CVEGEO =</span> <span class="fu">sprintf</span>(<span class="st">&quot;%05d&quot;</span>, CVEGEO))</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>POB_20regs <span class="ot">&lt;-</span> POB20 <span class="sc">%&gt;%</span>  </span>
+<span id="cb30-2"><a href="#cb30-2" tabindex="-1"></a>               <span class="fu">mutate</span>(<span class="at">CVE_ENT =</span> <span class="fu">substr</span>(CVEGEO, <span class="dv">1</span>, <span class="dv">2</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-3"><a href="#cb30-3" tabindex="-1"></a>                <span class="fu">filter</span>(CVE_ENT <span class="sc">==</span> <span class="st">&quot;20&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-4"><a href="#cb30-4" tabindex="-1"></a>                 <span class="fu">left_join</span>(., regs_oax) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-5"><a href="#cb30-5" tabindex="-1"></a>                  <span class="fu">group_by</span>(CVE_DIST, NOM_DIST) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-6"><a href="#cb30-6" tabindex="-1"></a>                   <span class="fu">summarise</span>(<span class="at">poblacion2020 =</span> <span class="fu">sum</span>(poblacion2020)) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-7"><a href="#cb30-7" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">CVEGEO =</span> <span class="fu">as.character</span>(CVE_DIST))</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a>TMI_20 <span class="ot">&lt;-</span> TMI_20 <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>           <span class="fu">left_join</span>(., POB20, <span class="at">by =</span> <span class="st">&quot;CVEGEO&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a>            <span class="fu">rename</span>(<span class="at">POB_2020 =</span> poblacion2020) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-4"><a href="#cb31-4" tabindex="-1"></a>             <span class="fu">left_join</span>(.,POB_20regs) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a>              <span class="fu">mutate</span>(<span class="at">POB_2020 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(POB_2020), poblacion2020, POB_2020)) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a>               <span class="fu">select</span>(<span class="sc">-</span><span class="fu">contains</span>(<span class="st">&quot;DIST&quot;</span>), <span class="sc">-</span>poblacion2020)</span></code></pre></div>
+</div>
 </div>
 
 
