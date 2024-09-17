@@ -362,7 +362,7 @@ POB20 <- read_excel(paste0(here::here(), "/Bases/Población 2020 (CONAPO).xlsx")
            select(CVEGEO, poblacion2020)
 ```
 
-### Regionalización 
+#### Regionalización 
 
 ```{r}
 # cálculo de las poblaciones por región en Oaxaca
@@ -389,6 +389,43 @@ TMI_20 <- TMI_20 %>%
                select(-contains("DIST"), -poblacion2020)
 ```
 
+### Paso 3. Índice de Salud 2020  
+
+**Paso 1. Expresar la Tasa de mortalidad infantil (TMI) municipal, en términos de SI**   
+
+```{r}
+TMI_20$SI_2020 <- 1 - (TMI_20$TMI_2020 / 1000)
+```
+
+
+
+**Paso 2. Calcular el máximo y mínimo de Supervivencia Infantil (SI) internacional a partir de las TMI de referencia**  
+
+```{r}
+TMI_20$SImax <- 1 - (tmi_minima / 1000)
+TMI_20$SImin <- 1 - (tmi_maxima / 1000)
+```
+
+
+**Paso 3. Calcular el Índice de Salud** 
+
+```{r}
+TMI_20 <- TMI_20 %>% 
+           mutate(IS_2020 = (SI_2020 - SImin) / (SImax - SImin))
+```
+
+
+```{r}
+base_IS2020 <- TMI_20 %>% 
+                select(CVE_ENT, CVEGEO, NOM_MUN, TMI_2020, IS_2020)
+```
+
+```{r, eval = FALSE}
+write_xlsx(base_IS2020, paste0(here::here(), "/Bases/RESULTADOS SS 2020.xlsx"))
+```
+
+
+## IDH 2020   
 
 
 

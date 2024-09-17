@@ -1912,9 +1912,8 @@ de Población y Vivienda 2020</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>POB20 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/Población 2020 (CONAPO).xlsx&quot;</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">CVEGEO =</span> <span class="fu">sprintf</span>(<span class="st">&quot;%05d&quot;</span>, CVEGEO)) <span class="sc">%&gt;%</span> </span>
 <span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>           <span class="fu">select</span>(CVEGEO, poblacion2020)</span></code></pre></div>
-</div>
-<div id="regionalización" class="section level3">
-<h3>Regionalización</h3>
+<div id="regionalización" class="section level4">
+<h4>Regionalización</h4>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># cálculo de las poblaciones por región en Oaxaca</span></span>
 <span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>regs_oax <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/Regionalizacion_OAX.xlsx&quot;</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>             <span class="fu">mutate</span>(<span class="at">CVEGEO =</span> <span class="fu">sprintf</span>(<span class="st">&quot;%05d&quot;</span>, CVEGEO))</span></code></pre></div>
@@ -1932,6 +1931,26 @@ de Población y Vivienda 2020</p>
 <span id="cb31-5"><a href="#cb31-5" tabindex="-1"></a>              <span class="fu">mutate</span>(<span class="at">POB_2020 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(POB_2020), poblacion2020, POB_2020)) <span class="sc">%&gt;%</span> </span>
 <span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a>               <span class="fu">select</span>(<span class="sc">-</span><span class="fu">contains</span>(<span class="st">&quot;DIST&quot;</span>), <span class="sc">-</span>poblacion2020)</span></code></pre></div>
 </div>
+</div>
+<div id="paso-3.-índice-de-salud-2020" class="section level3">
+<h3>Paso 3. Índice de Salud 2020</h3>
+<p><strong>Paso 1. Expresar la Tasa de mortalidad infantil (TMI)
+municipal, en términos de SI</strong></p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>TMI_20<span class="sc">$</span>SI_2020 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (TMI_20<span class="sc">$</span>TMI_2020 <span class="sc">/</span> <span class="dv">1000</span>)</span></code></pre></div>
+<p><strong>Paso 2. Calcular el máximo y mínimo de Supervivencia Infantil
+(SI) internacional a partir de las TMI de referencia</strong></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a>TMI_20<span class="sc">$</span>SImax <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (tmi_minima <span class="sc">/</span> <span class="dv">1000</span>)</span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a>TMI_20<span class="sc">$</span>SImin <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (tmi_maxima <span class="sc">/</span> <span class="dv">1000</span>)</span></code></pre></div>
+<p><strong>Paso 3. Calcular el Índice de Salud</strong></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a>TMI_20 <span class="ot">&lt;-</span> TMI_20 <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="#cb34-2" tabindex="-1"></a>           <span class="fu">mutate</span>(<span class="at">IS_2020 =</span> (SI_2020 <span class="sc">-</span> SImin) <span class="sc">/</span> (SImax <span class="sc">-</span> SImin))</span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a>base_IS2020 <span class="ot">&lt;-</span> TMI_20 <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="#cb35-2" tabindex="-1"></a>                <span class="fu">select</span>(CVE_ENT, CVEGEO, NOM_MUN, TMI_2020, IS_2020)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="fu">write_xlsx</span>(base_IS2020, <span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/RESULTADOS SS 2020.xlsx&quot;</span>))</span></code></pre></div>
+</div>
+</div>
+<div id="idh-2020" class="section level2">
+<h2>IDH 2020</h2>
 </div>
 
 
