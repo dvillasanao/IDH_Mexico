@@ -28,3 +28,286 @@ rm(list = ls())
 ```{r, echo=FALSE}
 setwd(here::here())
 ```
+
+```{r, echo = FALSE}
+library(tidyverse)
+library(readxl)
+library(writexl)
+require(stringr)
+#library(haven)
+#library(foreign)
+```
+
+##  Cálculo del subíndice de Educación 2020          
+
+### Recolección de datos
+
+**Valores máximos y mínimos de referencia:** 
+
+```{r}
+ae_maximo = 18
+ape_maximo = 15
+```
+
+
+### Censo de Población y Vivienda 2020
+
+Se utiliza la base completa de la muestra del Cuestionario Ampliado del Censo
+Consultar el Script `"Censo 2020.Rmd"`.
+
+
+```{r}
+load(paste0(here::here(), "/Bases/Base Completa Censo de población y vivienda 2020.Rda"))
+```
+
+
+### Paso 1. Generación de nuevas variables, previo a la recodificación
+
+```{r}
+base_educacion <- base_completa %>% 
+                   mutate(ASISTEN_R = ASISTEN,
+                          ESCOLARI_R = as.numeric(ESCOLARI),
+                          NIVACAD_R = as.numeric(NIVACAD),
+                          ESCOACUM_R = as.numeric(ESCOACUM))
+```
+
+###  Paso 2. Recodificación de los años de escolaridad
+ 
+```{r}
+base_educacion <- base_educacion %>% 
+                   mutate(anio = case_when(.$NIVACAD_R == 0 ~ 0,
+                                           .$NIVACAD_R == 1 ~ 0,
+                                           .$NIVACAD_R == 2 & .$ESCOLARI_R == 1 ~ 1,
+                                           .$NIVACAD_R == 2 & .$ESCOLARI_R == 2 ~ 2,
+                                           .$NIVACAD_R == 2 & .$ESCOLARI_R == 3 ~ 3,
+                                           .$NIVACAD_R == 2 & .$ESCOLARI_R == 4 ~ 4,
+                                           .$NIVACAD_R == 2 & .$ESCOLARI_R == 5 ~ 5,
+                                           .$NIVACAD_R == 2 & .$ESCOLARI_R > 5 & .$ESCOLARI_R < 99 ~ 6,
+                                           .$NIVACAD_R == 3 & .$ESCOLARI_R == 1 ~ 7,
+                                           .$NIVACAD_R == 3 & .$ESCOLARI_R == 2 ~ 8,
+                                           .$NIVACAD_R == 3 & .$ESCOLARI_R > 2 & .$ESCOLARI_R < 99 ~ 9,
+                                           .$NIVACAD_R == 4 & .$ESCOLARI_R == 1 ~ 10,
+                                           .$NIVACAD_R == 4 & .$ESCOLARI_R == 2 ~ 11,
+                                           .$NIVACAD_R == 4 & .$ESCOLARI_R > 2 & .$ESCOLARI_R < 99 ~ 12,
+                                           .$NIVACAD_R == 5 & .$ESCOLARI_R == 1 ~ 10,
+                                           .$NIVACAD_R == 5 & .$ESCOLARI_R == 2 ~ 11,
+                                           .$NIVACAD_R == 5 & .$ESCOLARI_R == 3 ~ 12,
+                                           .$NIVACAD_R == 5 & .$ESCOLARI_R > 3 & .$ESCOLARI_R < 99 ~ 13,
+                                           .$NIVACAD_R == 6 ~ 6,
+                                           .$NIVACAD_R == 7 & .$ESCOLARI_R == 1 ~ 10,
+                                           .$NIVACAD_R == 7 & .$ESCOLARI_R == 2 ~ 11,
+                                           .$NIVACAD_R == 7 & .$ESCOLARI_R == 3 ~ 12,
+                                           .$NIVACAD_R == 7 & .$ESCOLARI_R > 3 & .$ESCOLARI_R < 99 ~ 13,
+                                           .$NIVACAD_R == 8 & .$ESCOLARI_R == 1 ~ 13,
+                                           .$NIVACAD_R == 8 & .$ESCOLARI_R == 2 ~ 14,
+                                           .$NIVACAD_R == 8 & .$ESCOLARI_R > 2 & .$ESCOLARI_R < 99 ~ 15,
+                                           .$NIVACAD_R == 9 & .$ESCOLARI_R == 1 ~ 10,
+                                           .$NIVACAD_R == 9 & .$ESCOLARI_R == 2 ~ 11,
+                                           .$NIVACAD_R == 9 & .$ESCOLARI_R == 3 ~ 12,
+                                           .$NIVACAD_R == 9 & .$ESCOLARI_R > 3 & .$ESCOLARI_R < 99 ~ 13,
+                                           .$NIVACAD_R == 10 & .$ESCOLARI_R == 1 ~ 13,
+                                           .$NIVACAD_R == 10 & .$ESCOLARI_R == 2 ~ 14,
+                                           .$NIVACAD_R == 10 & .$ESCOLARI_R == 3 ~ 15,
+                                           .$NIVACAD_R == 10 & .$ESCOLARI_R > 3 & .$ESCOLARI_R < 99 ~ 16,
+                                           .$NIVACAD_R == 11 & .$ESCOLARI_R == 1 ~ 13,
+                                           .$NIVACAD_R == 11 & .$ESCOLARI_R == 2 ~ 14,
+                                           .$NIVACAD_R == 11 & .$ESCOLARI_R == 3 ~ 15,
+                                           .$NIVACAD_R == 11 & .$ESCOLARI_R > 3 & .$ESCOLARI_R < 99 ~ 16,
+                                           .$NIVACAD_R == 12 & .$ESCOLARI_R < 99 ~ 17,
+                                           .$NIVACAD_R == 13 & .$ESCOLARI_R == 1 ~ 17,
+                                           .$NIVACAD_R == 13 & .$ESCOLARI_R > 1 & .$ESCOLARI_R < 99 ~ 18,
+                                           .$NIVACAD_R == 14 & .$ESCOLARI_R < 99 ~ 18,
+                                           .$ESCOACUM == 99 ~ 99))
+```
+
+### Paso 3: Creación de identificadores únicos  
+
+```{r}
+base_educacion <- base_educacion %>% 
+                   mutate(estado = str_pad(.$ENT, width = 2, side = c("left"), pad = "0"), 
+                          municipio = str_pad(.$MUN, width = 3, side = c("left"), pad = "0")) %>% 
+                    mutate(CVEGEO = paste0(ENT, MUN))
+```
+
+
+### Paso 4 CREACIÓN DEL ÍNDICE DE EDUCACIÓN   
+
+#### Paso 4a. Creación de los años promedio de escolaridad  
+
+```{r}
+base_educacion <- base_educacion %>% 
+                   mutate(edad_m = ifelse(EDAD == 999, NA, EDAD)) %>% 
+                    mutate(rango_anios = ifelse(anio < 99, 1, 0))
+
+anios_promedio <- base_educacion %>% 
+                   filter(edad_m > 24 & rango_anios == 1) %>%  
+                    group_by(estado, CVEGEO, municipio) %>% 
+                     summarise(anios = weighted.mean(anio, FACTOR))
+```
+
+
+#### Paso 4b. Creación de la tasa de matriculación y de los años esperados   
+
+```{r}
+base_educacion <- base_educacion %>% 
+                   mutate(asistencia = case_when(.$ASISTEN == 1 ~ 1,
+                                                 .$ASISTEN == 3 ~ 0,
+                                                 .$ASISTEN == 9 ~ 0,
+                                                ),
+                          rango = case_when(.$EDAD > 5 & .$EDAD < 25 ~ 1,
+                                            TRUE ~ 0),
+                          poblacion = FACTOR) %>% 
+                    mutate(matriculados = .$poblacion * .$asistencia)
+```
+
+```{r}
+tasa_matriculacion <- base_educacion %>% 
+                       filter(rango == 1) %>%  
+                        group_by(estado, CVEGEO, municipio, EDAD) %>% 
+                         summarise(poblacion = sum(poblacion, na.rm = T), 
+                                   matriculados = sum(matriculados, na.rm = T)) %>% 
+                          mutate(tm = matriculados/poblacion) %>% 
+                           group_by(CVEGEO) %>% 
+                            mutate(aesperados = sum(tm)) %>% 
+                             arrange(CVEGEO)
+```
+
+#### Paso 4c. Pegado de las bases de datos para generar el índice
+
+```{r}
+base_IE2020 <- tasa_matriculacion %>% 
+                select(CVEGEO, aesperados) %>%
+                 unique() %>% 
+                  inner_join(., anios_promedio, by = "CVEGEO")
+```
+
+
+
+#### Paso 4d. Creación de los índices
+
+```{r}
+POB20 <- readxl::read_excel(paste0(here::here(), "/Bases/Población 2020.xlsx")) %>% 
+          mutate(CVEGEO = sprintf("%05d", Clave)) %>% 
+           rename(pob20 = poblacion2020) %>%  
+            select(CVEGEO, pob20)
+```
+
+```{r}
+base_IE2020 <- base_IE2020 %>% 
+                mutate(IAP = anios/ape_maximo, 
+                       IAE = aesperados/ae_maximo, 
+                       IEDU = (IAP + IAE) / 2) %>% 
+                 ungroup() %>% 
+                  left_join(POB20, by = "CVEGEO") %>% 
+                   rename(AP2020 = anios, 
+                          AE2020 = aesperados, 
+                          IE_2020 = IEDU) %>% 
+                    select(CVEGEO, pob20, AP2020, AE2020, IE_2020)
+```
+
+
+```{r, eval = FALSE}
+writexl::write_xlsx(base_IE2020, paste0(here::here(), "/Bases/RESULTADOS SE 2020.xlsx"))
+```
+
+## Cálculo del subíndice de Ingreso 2020     
+
+### Paso 1: Recolección de datos externos 
+
+```{r}
+inpc_DIC2015 = 89.046818
+inpc_NOV2020 = 109.271 
+inb20 = 22644301.694
+ajustePPA = 9.702813
+```
+
+```{r}
+#Valores máximos y mínimos de referencia: 
+ing_maximo = 75000
+ing_minimo = 100
+#Revisar anexo "Indicadores de referencia IDH"
+```
+
+### Paso 2: Reordenar las bases de datos   
+
+```{r}
+ictpc_20 <- read_excel(paste0(here::here(), "/Bases/ICTP2020_CONEVAL.xlsx"), skip = 1) 
+
+colnames(ictpc_20) <- c("CVE_ENT",
+                        "NOM_ENT",
+                        "CVEGEO",
+                        "NOM_MUN", 
+                        "ICTPC20")
+
+ictpc_20 <- ictpc_20 %>% 
+             mutate(ICTPC20 = as.numeric(.$ICTPC20))
+
+POB_20 <- read_excel(paste0(here::here(), "/Bases/Población 2020.xlsx")) %>% 
+           mutate(Clave = sprintf("%05d", Clave))
+                     
+colnames(POB_20) <- c("CVEGEO",
+                      "NOM_MUN", 
+                      "POB20")
+
+ictpc_20 <- ictpc_20 %>%
+              full_join(., POB_20, by = "CVEGEO") %>% 
+               rename_at(vars(ends_with(".x")), ~str_replace(., "\\..$","")) %>% 
+                select_at(vars(-ends_with(".y")))
+```
+
+
+```{r}
+# 3 municipios no cuentan CON ICTPC calculado por el CONEVAL: 
+# 07125 Honduras de la Sierra, CHS
+# 29048 La Magdalena Tlaltelulco, TLX
+# 04012 Seybaplaya, CAM
+```
+
+#####  Pasos Índice de ingreso 2020  
+
+**Paso 1. Cambio del ICTPC  a precios de diciembre de 2015 para mantener la comparación de la serie (2010-2020)**
+
+```{r}
+ajuste_inpc <- inpc_DIC2015 / inpc_NOV2020
+```
+
+**Paso 2. Generación del ICTPC anual y ICT por municipio**   
+
+
+```{r}
+ictpc_20 <-  ictpc_20 %>% 
+              mutate(ICTP20_15 = ICTPC20 * ajuste_inpc) %>% 
+               mutate(ICTPC20_a = ICTP20_15 * 12,
+                      ICT2020 = ICTPC20_a * POB20)
+```
+
+
+**Paso 3. Generación del factor de ajuste utilizando el Ingreso Nacional Bruto (INB)**
+
+```{r}
+#El Agregado del Ingreso Corriente Total a nivel nacional: 
+ICT20_NACIONAL <- ictpc_20 %>% 
+                   summarise(sum(ICT2020, na.rm = T)) %>% 
+                    unlist() %>% 
+                     unname()
+```
+
+```{r}
+#Mientras que el INB 2020 es:
+inb20_def <- inb20 * ajuste_inpc  #ajustado a precios de dic2015
+```
+
+#Factor de ajuste del ingreso total
+ajuste_inb_20 <- inb20_def*1000000 / ICT20_NACIONAL
+
+## Paso 4. Multiplicar el ICTPC anual, a precios de noviembre de 2020 por el factor de ajuste
+ictpc_20 <-  ictpc_20 %>% mutate(ICTPC_ajustado20=ICTPC20_a*ajuste_inb_20) 
+
+
+## Paso 5. Dividir el ICTPC ajustado entre el Factor de conversión de PPA con respecto al dólar estadounidense, 
+ictpc_20 <-  ictpc_20 %>% mutate(ING_PPC20=ICTPC_ajustado20/ajustePPA)
+
+## Paso 6. Crear el índice de Ingreso del IDHM
+II_2020 <- ictpc_20 %>% mutate(II_2020=(log(ING_PPC20)-log(ing_minimo))/(log(ing_maximo)-log(ing_minimo)))
+
+base_II2020 <- II_2020 %>% select(CVE_ENT, NOM_ENT, CVEGEO, NOM_MUN, ICTPC20, II_2020, POB20) %>% rename(pob20=POB20)
