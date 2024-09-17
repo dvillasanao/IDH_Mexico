@@ -1951,6 +1951,40 @@ municipal, en términos de SI</strong></p>
 </div>
 <div id="idh-2020" class="section level2">
 <h2>IDH 2020</h2>
+<p>Dado que los subíndices de ingreso y educación se tienen a nivel
+municipio en Oxaca, pero el subíndice de salud, únicamente se calculó a
+nivel distrito, se homologan todos los subíndices a nivel distrito para
+Oaxaca.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>indices_oax <span class="ot">&lt;-</span> base_II2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>                <span class="fu">full_join</span>(., base_IE2020) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a>                 <span class="fu">filter</span>(CVE_ENT <span class="sc">==</span> <span class="st">&quot;20&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-4"><a href="#cb37-4" tabindex="-1"></a>                  <span class="fu">left_join</span>(., regs_oax) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-5"><a href="#cb37-5" tabindex="-1"></a>                   <span class="fu">group_by</span>(CVE_DIST, NOM_DIST) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-6"><a href="#cb37-6" tabindex="-1"></a>                    <span class="fu">summarise</span>(<span class="at">IE_2020   =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> IE_2020, <span class="at">w =</span> pob20), </span>
+<span id="cb37-7"><a href="#cb37-7" tabindex="-1"></a>                              <span class="at">II_2020   =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> II_2020, <span class="at">w =</span> pob20), </span>
+<span id="cb37-8"><a href="#cb37-8" tabindex="-1"></a>                              <span class="at">ICTPC2020 =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> ICTPC20, <span class="at">w =</span> pob20),</span>
+<span id="cb37-9"><a href="#cb37-9" tabindex="-1"></a>                              <span class="at">AP2020    =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> AP2020, <span class="at">w =</span> pob20),</span>
+<span id="cb37-10"><a href="#cb37-10" tabindex="-1"></a>                              <span class="at">AE2020    =</span> <span class="fu">weighted.mean</span>(<span class="at">x =</span> AE2020, <span class="at">w =</span> pob20),</span>
+<span id="cb37-11"><a href="#cb37-11" tabindex="-1"></a>                              <span class="at">pob20     =</span> <span class="fu">sum</span>(pob20)) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-12"><a href="#cb37-12" tabindex="-1"></a>                                           <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb37-13"><a href="#cb37-13" tabindex="-1"></a>                                            <span class="fu">mutate</span>(<span class="at">CVEGEO =</span> <span class="fu">as.character</span>(CVE_DIST))</span></code></pre></div>
+<p><strong>IDH para el estado de Oaxaca (nivel distritos)</strong></p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a>idh_oax <span class="ot">&lt;-</span> base_IS2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a>            <span class="fu">filter</span>(CVE_ENT <span class="sc">==</span> <span class="st">&quot;20&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-3"><a href="#cb38-3" tabindex="-1"></a>             <span class="fu">left_join</span>(., indices_oax) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-4"><a href="#cb38-4" tabindex="-1"></a>              <span class="fu">select</span>(<span class="sc">-</span>CVE_DIST) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-5"><a href="#cb38-5" tabindex="-1"></a>               <span class="fu">mutate</span>(<span class="at">IDH_2020 =</span> (IE_2020 <span class="sc">*</span> II_2020 <span class="sc">*</span> IS_2020)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb38-6"><a href="#cb38-6" tabindex="-1"></a>                <span class="fu">mutate</span>(<span class="at">NOM_ENT =</span> <span class="st">&quot;Oaxaca&quot;</span>)</span></code></pre></div>
+<p><strong>IDH para el resto de los estados (nivel
+municipio)</strong></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a>idh_resto <span class="ot">&lt;-</span> base_II2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="#cb39-2" tabindex="-1"></a>              <span class="fu">full_join</span>(., base_IE2020) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-3"><a href="#cb39-3" tabindex="-1"></a>               <span class="fu">left_join</span>(., base_IS2020) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-4"><a href="#cb39-4" tabindex="-1"></a>                <span class="fu">filter</span>(CVE_ENT <span class="sc">!=</span> <span class="st">&quot;20&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-5"><a href="#cb39-5" tabindex="-1"></a>                 <span class="fu">mutate</span>(<span class="at">IDH_2020 =</span> (IE_2020 <span class="sc">*</span> II_2020 <span class="sc">*</span> IS_2020)<span class="sc">^</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">3</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-6"><a href="#cb39-6" tabindex="-1"></a>                  <span class="fu">rename</span>(<span class="at">ICTPC2020 =</span> ICTPC20)</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a>idh_2020 <span class="ot">&lt;-</span> <span class="fu">full_join</span>(idh_oax, idh_resto)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="fu">write_xlsx</span>(idh_2020, <span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/RESULTADOS IDH 2020.xlsx&quot;</span>))</span></code></pre></div>
 </div>
 
 

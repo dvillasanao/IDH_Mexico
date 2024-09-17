@@ -425,8 +425,53 @@ write_xlsx(base_IS2020, paste0(here::here(), "/Bases/RESULTADOS SS 2020.xlsx"))
 ```
 
 
-## IDH 2020   
+## IDH 2020    
 
+Dado que los subíndices de ingreso y educación se tienen a nivel municipio en Oxaca, pero el subíndice de salud, únicamente se calculó a nivel distrito, se homologan todos los subíndices a nivel distrito para Oaxaca.   
+
+```{r}
+indices_oax <- base_II2020 %>% 
+                full_join(., base_IE2020) %>% 
+                 filter(CVE_ENT == "20") %>% 
+                  left_join(., regs_oax) %>% 
+                   group_by(CVE_DIST, NOM_DIST) %>% 
+                    summarise(IE_2020   = weighted.mean(x = IE_2020, w = pob20), 
+                              II_2020   = weighted.mean(x = II_2020, w = pob20), 
+                              ICTPC2020 = weighted.mean(x = ICTPC20, w = pob20),
+                              AP2020    = weighted.mean(x = AP2020, w = pob20),
+                              AE2020    = weighted.mean(x = AE2020, w = pob20),
+                              pob20     = sum(pob20)) %>% 
+                                           ungroup() %>% 
+                                            mutate(CVEGEO = as.character(CVE_DIST))
+```
+**IDH para el estado de Oaxaca (nivel distritos)** 
+
+```{r}
+idh_oax <- base_IS2020 %>% 
+            filter(CVE_ENT == "20") %>% 
+             left_join(., indices_oax) %>% 
+              select(-CVE_DIST) %>% 
+               mutate(IDH_2020 = (IE_2020 * II_2020 * IS_2020)^(1/3)) %>% 
+                mutate(NOM_ENT = "Oaxaca")
+```
+**IDH para el resto de los estados (nivel municipio)**  
+
+```{r}
+idh_resto <- base_II2020 %>% 
+              full_join(., base_IE2020) %>% 
+               left_join(., base_IS2020) %>% 
+                filter(CVE_ENT != "20") %>% 
+                 mutate(IDH_2020 = (IE_2020 * II_2020 * IS_2020)^(1/3)) %>% 
+                  rename(ICTPC2020 = ICTPC20)
+```
+
+```{r}
+idh_2020 <- full_join(idh_oax, idh_resto)
+```
+
+```{r, eval = FALSE}
+write_xlsx(idh_2020, paste0(here::here(), "/Bases/RESULTADOS IDH 2020.xlsx"))
+```
 
 
 
