@@ -1682,12 +1682,12 @@ border-radius: 0px;
 <div class="sourceCode" id="cb1"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>ae_maximo <span class="ot">=</span> <span class="dv">18</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>ape_maximo <span class="ot">=</span> <span class="dv">15</span></span></code></pre></div>
 </div>
-</div>
-<div id="censo-de-población-y-vivienda-2020" class="section level2">
-<h2>Censo de Población y Vivienda 2020</h2>
+<div id="censo-de-población-y-vivienda-2020" class="section level3">
+<h3>Censo de Población y Vivienda 2020</h3>
 <p>Se utiliza la base completa de la muestra del Cuestionario Ampliado
 del Censo Consultar el Script <code>&quot;Censo 2020.Rmd&quot;</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/Base Completa Censo de población y vivienda 2020.Rda&quot;</span>))</span></code></pre></div>
+</div>
 <div id="paso-1.-generación-de-nuevas-variables-previo-a-la-recodificación" class="section level3">
 <h3>Paso 1. Generación de nuevas variables, previo a la
 recodificación</h3>
@@ -1751,9 +1751,8 @@ recodificación</h3>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>                          <span class="at">municipio =</span> <span class="fu">str_pad</span>(.<span class="sc">$</span>MUN, <span class="at">width =</span> <span class="dv">3</span>, <span class="at">side =</span> <span class="fu">c</span>(<span class="st">&quot;left&quot;</span>), <span class="at">pad =</span> <span class="st">&quot;0&quot;</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">CVEGEO =</span> <span class="fu">paste0</span>(ENT, MUN))</span></code></pre></div>
 </div>
-</div>
-<div id="paso-4-creación-del-índice-de-educación" class="section level2">
-<h2>Paso 4 CREACIÓN DEL ÍNDICE DE EDUCACIÓN</h2>
+<div id="paso-4-creación-del-índice-de-educación" class="section level3">
+<h3>Paso 4 CREACIÓN DEL ÍNDICE DE EDUCACIÓN</h3>
 <div id="paso-4a.-creación-de-los-años-promedio-de-escolaridad" class="section level4">
 <h4>Paso 4a. Creación de los años promedio de escolaridad</h4>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>base_educacion <span class="ot">&lt;-</span> base_educacion <span class="sc">%&gt;%</span> </span>
@@ -1810,8 +1809,92 @@ esperados</h4>
 <span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>                          <span class="at">AE2020 =</span> aesperados, </span>
 <span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a>                          <span class="at">IE_2020 =</span> IEDU) <span class="sc">%&gt;%</span> </span>
 <span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a>                    <span class="fu">select</span>(CVEGEO, pob20, AP2020, AE2020, IE_2020)</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(base_IE2020, <span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;Bases/RESULTADOS SE 2020.xlsx&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>writexl<span class="sc">::</span><span class="fu">write_xlsx</span>(base_IE2020, <span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/RESULTADOS SE 2020.xlsx&quot;</span>))</span></code></pre></div>
 </div>
+</div>
+</div>
+<div id="cálculo-del-subíndice-de-ingreso-2020" class="section level2">
+<h2>Cálculo del subíndice de Ingreso 2020</h2>
+<div id="paso-1-recolección-de-datos-externos" class="section level3">
+<h3>Paso 1: Recolección de datos externos</h3>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>inpc_DIC2015 <span class="ot">=</span> <span class="fl">89.046818</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>inpc_NOV2020 <span class="ot">=</span> <span class="fl">109.271</span> </span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>inb20 <span class="ot">=</span> <span class="fl">22644301.694</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>ajustePPA <span class="ot">=</span> <span class="fl">9.702813</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co">#Valores máximos y mínimos de referencia: </span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>ing_maximo <span class="ot">=</span> <span class="dv">75000</span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>ing_minimo <span class="ot">=</span> <span class="dv">100</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co">#Revisar anexo &quot;Indicadores de referencia IDH&quot;</span></span></code></pre></div>
+</div>
+<div id="paso-2-reordenar-las-bases-de-datos" class="section level3">
+<h3>Paso 2: Reordenar las bases de datos</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>ictpc_20 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/ICTP2020_CONEVAL.xlsx&quot;</span>), <span class="at">skip =</span> <span class="dv">1</span>) </span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="fu">colnames</span>(ictpc_20) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CVE_ENT&quot;</span>,</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>                        <span class="st">&quot;NOM_ENT&quot;</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>                        <span class="st">&quot;CVEGEO&quot;</span>,</span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>                        <span class="st">&quot;NOM_MUN&quot;</span>, </span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>                        <span class="st">&quot;ICTPC20&quot;</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a></span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>ictpc_20 <span class="ot">&lt;-</span> ictpc_20 <span class="sc">%&gt;%</span> </span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>             <span class="fu">mutate</span>(<span class="at">ICTPC20 =</span> <span class="fu">as.numeric</span>(.<span class="sc">$</span>ICTPC20))</span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>POB_20 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/Población 2020.xlsx&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a>           <span class="fu">mutate</span>(<span class="at">Clave =</span> <span class="fu">sprintf</span>(<span class="st">&quot;%05d&quot;</span>, Clave))</span>
+<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a>                     </span>
+<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="fu">colnames</span>(POB_20) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CVEGEO&quot;</span>,</span>
+<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a>                      <span class="st">&quot;NOM_MUN&quot;</span>, </span>
+<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a>                      <span class="st">&quot;POB20&quot;</span>)</span>
+<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a></span>
+<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a>ictpc_20 <span class="ot">&lt;-</span> ictpc_20 <span class="sc">%&gt;%</span></span>
+<span id="cb15-20"><a href="#cb15-20" tabindex="-1"></a>              <span class="fu">full_join</span>(., POB_20, <span class="at">by =</span> <span class="st">&quot;CVEGEO&quot;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-21"><a href="#cb15-21" tabindex="-1"></a>               <span class="fu">rename_at</span>(<span class="fu">vars</span>(<span class="fu">ends_with</span>(<span class="st">&quot;.x&quot;</span>)), <span class="sc">~</span><span class="fu">str_replace</span>(., <span class="st">&quot;</span><span class="sc">\\</span><span class="st">..$&quot;</span>,<span class="st">&quot;&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-22"><a href="#cb15-22" tabindex="-1"></a>                <span class="fu">select_at</span>(<span class="fu">vars</span>(<span class="sc">-</span><span class="fu">ends_with</span>(<span class="st">&quot;.y&quot;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># 3 municipios no cuentan CON ICTPC calculado por el CONEVAL: </span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="co"># 07125 Honduras de la Sierra, CHS</span></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="co"># 29048 La Magdalena Tlaltelulco, TLX</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co"># 04012 Seybaplaya, CAM</span></span></code></pre></div>
+</div>
+<div id="paso3.-índice-de-ingreso-2020" class="section level3">
+<h3>Paso3. Índice de ingreso 2020</h3>
+<p><strong>Paso 1. Cambio del ICTPC a precios de diciembre de 2015 para
+mantener la comparación de la serie (2010-2020)</strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>ajuste_inpc <span class="ot">&lt;-</span> inpc_DIC2015 <span class="sc">/</span> inpc_NOV2020</span></code></pre></div>
+<p><strong>Paso 2. Generación del ICTPC anual y ICT por
+municipio</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>ictpc_20 <span class="ot">&lt;-</span>  ictpc_20 <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>              <span class="fu">mutate</span>(<span class="at">ICTP20_15 =</span> ICTPC20 <span class="sc">*</span> ajuste_inpc) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>               <span class="fu">mutate</span>(<span class="at">ICTPC20_a =</span> ICTP20_15 <span class="sc">*</span> <span class="dv">12</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>                      <span class="at">ICT2020 =</span> ICTPC20_a <span class="sc">*</span> POB20)</span></code></pre></div>
+<p><strong>Paso 3. Generación del factor de ajuste utilizando el Ingreso
+Nacional Bruto (INB)</strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="co">#El Agregado del Ingreso Corriente Total a nivel nacional: </span></span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>ICT20_NACIONAL <span class="ot">&lt;-</span> ictpc_20 <span class="sc">%&gt;%</span> </span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>                   <span class="fu">summarise</span>(<span class="fu">sum</span>(ICT2020, <span class="at">na.rm =</span> T)) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>                    <span class="fu">unlist</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>                     <span class="fu">unname</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co">#Mientras que el INB 2020 es:</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>inb20_def <span class="ot">&lt;-</span> inb20 <span class="sc">*</span> ajuste_inpc  <span class="co">#ajustado a precios de dic2015</span></span></code></pre></div>
+<p><strong>Factor de ajuste del ingreso total</strong></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>ajuste_inb_20 <span class="ot">&lt;-</span> inb20_def <span class="sc">*</span> <span class="dv">1000000</span> <span class="sc">/</span> ICT20_NACIONAL</span></code></pre></div>
+<p><strong>Paso 4. Multiplicar el ICTPC anual, a precios de noviembre de
+2020 por el factor de ajuste</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>ictpc_20 <span class="ot">&lt;-</span> ictpc_20 <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>             <span class="fu">mutate</span>(<span class="at">ICTPC_ajustado20 =</span> ICTPC20_a <span class="sc">*</span> ajuste_inb_20) </span></code></pre></div>
+<p><strong>Paso 5. Dividir el ICTPC ajustado entre el Factor de
+conversión de PPA con respecto al dólar estadounidense,</strong></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>ictpc_20 <span class="ot">&lt;-</span>  ictpc_20 <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>              <span class="fu">mutate</span>(<span class="at">ING_PPC20 =</span> ICTPC_ajustado20 <span class="sc">/</span> ajustePPA)</span></code></pre></div>
+<p><strong>Paso 6. Crear el índice de Ingreso del IDHM</strong></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>II_2020 <span class="ot">&lt;-</span> ictpc_20 <span class="sc">%&gt;%</span> </span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">II_2020 =</span> (<span class="fu">log</span>(ING_PPC20) <span class="sc">-</span> <span class="fu">log</span>(ing_minimo)) <span class="sc">/</span> (<span class="fu">log</span>(ing_maximo) <span class="sc">-</span> <span class="fu">log</span>(ing_minimo)))</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>base_II2020 <span class="ot">&lt;-</span> II_2020 <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>                <span class="fu">select</span>(CVE_ENT, NOM_ENT, CVEGEO, NOM_MUN, ICTPC20, II_2020, POB20) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>                 <span class="fu">rename</span>(<span class="at">pob20 =</span> POB20)</span></code></pre></div>
+</div>
+</div>
+<div id="cálculo-del-subíndice-de-salud-2020" class="section level2">
+<h2>Cálculo del Subíndice de Salud 2020</h2>
 </div>
 
 

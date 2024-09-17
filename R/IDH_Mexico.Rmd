@@ -263,7 +263,7 @@ ictpc_20 <- ictpc_20 %>%
 # 04012 Seybaplaya, CAM
 ```
 
-#####  Pasos Índice de ingreso 2020  
+###  Paso3. Índice de ingreso 2020  
 
 **Paso 1. Cambio del ICTPC  a precios de diciembre de 2015 para mantener la comparación de la serie (2010-2020)**
 
@@ -297,17 +297,44 @@ ICT20_NACIONAL <- ictpc_20 %>%
 inb20_def <- inb20 * ajuste_inpc  #ajustado a precios de dic2015
 ```
 
-#Factor de ajuste del ingreso total
-ajuste_inb_20 <- inb20_def*1000000 / ICT20_NACIONAL
+**Factor de ajuste del ingreso total**
 
-## Paso 4. Multiplicar el ICTPC anual, a precios de noviembre de 2020 por el factor de ajuste
-ictpc_20 <-  ictpc_20 %>% mutate(ICTPC_ajustado20=ICTPC20_a*ajuste_inb_20) 
+```{r}
+ajuste_inb_20 <- inb20_def * 1000000 / ICT20_NACIONAL
+```
 
 
-## Paso 5. Dividir el ICTPC ajustado entre el Factor de conversión de PPA con respecto al dólar estadounidense, 
-ictpc_20 <-  ictpc_20 %>% mutate(ING_PPC20=ICTPC_ajustado20/ajustePPA)
 
-## Paso 6. Crear el índice de Ingreso del IDHM
-II_2020 <- ictpc_20 %>% mutate(II_2020=(log(ING_PPC20)-log(ing_minimo))/(log(ing_maximo)-log(ing_minimo)))
+**Paso 4. Multiplicar el ICTPC anual, a precios de noviembre de 2020 por el factor de ajuste**
 
-base_II2020 <- II_2020 %>% select(CVE_ENT, NOM_ENT, CVEGEO, NOM_MUN, ICTPC20, II_2020, POB20) %>% rename(pob20=POB20)
+```{r}
+ictpc_20 <- ictpc_20 %>% 
+             mutate(ICTPC_ajustado20 = ICTPC20_a * ajuste_inb_20) 
+```
+
+
+**Paso 5. Dividir el ICTPC ajustado entre el Factor de conversión de PPA con respecto al dólar estadounidense,**   
+
+```{r}
+ictpc_20 <-  ictpc_20 %>% 
+              mutate(ING_PPC20 = ICTPC_ajustado20 / ajustePPA)
+```
+
+
+
+**Paso 6. Crear el índice de Ingreso del IDHM**  
+
+```{r}
+II_2020 <- ictpc_20 %>% 
+            mutate(II_2020 = (log(ING_PPC20) - log(ing_minimo)) / (log(ing_maximo) - log(ing_minimo)))
+```
+
+
+```{r}
+base_II2020 <- II_2020 %>% 
+                select(CVE_ENT, NOM_ENT, CVEGEO, NOM_MUN, ICTPC20, II_2020, POB20) %>% 
+                 rename(pob20 = POB20)
+```
+
+
+## Cálculo del Subíndice de Salud 2020    
