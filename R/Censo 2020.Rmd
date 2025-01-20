@@ -29,6 +29,17 @@ rm(list = ls())
 setwd(here::here())
 ```
 
+## Informe de Desarrollo Humano Municipal 2010-2020: una década de transformaciones locales en México  
+
+Este informe, elaborado por el Programa de las Naciones Unidas para el Desarrollo (PNUD), presenta un análisis detallado de los avances y desafíos en materia de desarrollo humano en los municipios mexicanos durante la década de 2010 a 2020.
+
+**Implicaciones**:
+
+Los resultados de este informe ofrecen un panorama completo de la situación del desarrollo humano en México a nivel municipal. Esta información es fundamental para identificar las áreas de oportunidad, diseñar estrategias de intervención y monitorear los avances en la consecución de los Objetivos de Desarrollo Sostenible.  
+
+**Censo de Población y Vivienda 2020**   
+
+El Censo de Población y Vivienda 2020, proporciona una gran cantidad de información que es esencial para calcular el IDH y evaluar el progreso en materia de desarrollo humano. Al analizar estos indicadores, podemos identificar las fortalezas y debilidades de un país y diseñar políticas públicas más efectivas para mejorar la calidad de vida de la población.
 
 Se descargan de los microdatos por estado del cuestionario ampliado del Censo Nacional de Población y Vivienda 2020 (INEGI).   
 
@@ -43,7 +54,7 @@ abrevs <- data.frame(cve = sprintf("%02d", as.numeric(1:32)),
 ```
 
 ```{r}
-temp<- tempfile()
+temp <- tempfile()
 
 tokeep <- c("ID_VIV", "ID_PERSONA", "ENT", "MUN", "FACTOR", "SEXO", "EDAD", "ASISTEN", "ESCOLARI", "NIVACAD", "ALFABET", "ESCOACUM", "CONACT", "UPM", "ESTRATO")
 

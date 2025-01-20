@@ -1673,6 +1673,26 @@ border-radius: 0px;
 </div>
 
 
+<div id="informe-de-desarrollo-humano-municipal-2010-2020-una-década-de-transformaciones-locales-en-méxico" class="section level2">
+<h2>Informe de Desarrollo Humano Municipal 2010-2020: una década de
+transformaciones locales en México</h2>
+<p>Este informe, elaborado por el Programa de las Naciones Unidas para
+el Desarrollo (PNUD), presenta un análisis detallado de los avances y
+desafíos en materia de desarrollo humano en los municipios mexicanos
+durante la década de 2010 a 2020.</p>
+<p><strong>Implicaciones</strong>:</p>
+<p>Los resultados de este informe ofrecen un panorama completo de la
+situación del desarrollo humano en México a nivel municipal. Esta
+información es fundamental para identificar las áreas de oportunidad,
+diseñar estrategias de intervención y monitorear los avances en la
+consecución de los Objetivos de Desarrollo Sostenible.</p>
+<p><strong>Censo de Población y Vivienda 2020</strong></p>
+<p>El Censo de Población y Vivienda 2020, proporciona una gran cantidad
+de información que es esencial para calcular el IDH y evaluar el
+progreso en materia de desarrollo humano. Al analizar estos indicadores,
+podemos identificar las fortalezas y debilidades de un país y diseñar
+políticas públicas más efectivas para mejorar la calidad de vida de la
+población.</p>
 <p>Se descargan de los microdatos por estado del cuestionario ampliado
 del Censo Nacional de Población y Vivienda 2020 (INEGI).</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>abrevs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">cve =</span> <span class="fu">sprintf</span>(<span class="st">&quot;%02d&quot;</span>, <span class="fu">as.numeric</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">32</span>)),</span>
@@ -1682,7 +1702,7 @@ del Censo Nacional de Población y Vivienda 2020 (INEGI).</p>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>                                <span class="st">&quot;San Luis Potosí&quot;</span>,<span class="st">&quot;Sinaloa&quot;</span>,<span class="st">&quot;Sonora&quot;</span>,<span class="st">&quot;Tabasco&quot;</span>,<span class="st">&quot;Tamaulipas&quot;</span>,<span class="st">&quot;Tlaxcala&quot;</span>,<span class="st">&quot;Veracruz&quot;</span>,<span class="st">&quot;Yucatán&quot;</span>,<span class="st">&quot;Zacatecas&quot;</span>),</span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>                     <span class="at">abv =</span> <span class="fu">c</span>(<span class="st">&quot;ags&quot;</span>,<span class="st">&quot;bc&quot;</span>,<span class="st">&quot;bcs&quot;</span>,<span class="st">&quot;cam&quot;</span>,<span class="st">&quot;coa&quot;</span>,<span class="st">&quot;col&quot;</span>,<span class="st">&quot;chs&quot;</span>,<span class="st">&quot;chh&quot;</span>,<span class="st">&quot;cdmx&quot;</span>,<span class="st">&quot;dgo&quot;</span>,<span class="st">&quot;gto&quot;</span>,<span class="st">&quot;gro&quot;</span>,<span class="st">&quot;hgo&quot;</span>,<span class="st">&quot;jal&quot;</span>,<span class="st">&quot;mex&quot;</span>,<span class="st">&quot;mich&quot;</span>,<span class="st">&quot;mor&quot;</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>                             <span class="st">&quot;nay&quot;</span>,<span class="st">&quot;nl&quot;</span>,<span class="st">&quot;oax&quot;</span>,<span class="st">&quot;pue&quot;</span>,<span class="st">&quot;qro&quot;</span>,<span class="st">&quot;qroo&quot;</span>,<span class="st">&quot;slp&quot;</span>,<span class="st">&quot;sin&quot;</span>,<span class="st">&quot;son&quot;</span>,<span class="st">&quot;tab&quot;</span>,<span class="st">&quot;tam&quot;</span>,<span class="st">&quot;tla&quot;</span>,<span class="st">&quot;ver&quot;</span>,<span class="st">&quot;yuc&quot;</span>,<span class="st">&quot;zac&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>temp<span class="ot">&lt;-</span> <span class="fu">tempfile</span>()</span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">tempfile</span>()</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>tokeep <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ID_VIV&quot;</span>, <span class="st">&quot;ID_PERSONA&quot;</span>, <span class="st">&quot;ENT&quot;</span>, <span class="st">&quot;MUN&quot;</span>, <span class="st">&quot;FACTOR&quot;</span>, <span class="st">&quot;SEXO&quot;</span>, <span class="st">&quot;EDAD&quot;</span>, <span class="st">&quot;ASISTEN&quot;</span>, <span class="st">&quot;ESCOLARI&quot;</span>, <span class="st">&quot;NIVACAD&quot;</span>, <span class="st">&quot;ALFABET&quot;</span>, <span class="st">&quot;ESCOACUM&quot;</span>, <span class="st">&quot;CONACT&quot;</span>, <span class="st">&quot;UPM&quot;</span>, <span class="st">&quot;ESTRATO&quot;</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
@@ -1700,6 +1720,7 @@ del Censo Nacional de Población y Vivienda 2020 (INEGI).</p>
 <span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>}</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>base_completa <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">mget</span>(<span class="fu">ls</span>(<span class="at">pattern =</span> <span class="st">&quot;Personas&quot;</span>)))</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">save</span>(base_completa, <span class="at">file=</span><span class="st">&quot;Base Completa Censo de población y vivienda 2020.Rda&quot;</span>)</span></code></pre></div>
+</div>
 
 
 
