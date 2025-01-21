@@ -1371,6 +1371,230 @@ window.initializeCodeFolding = function(show) {
 
 }
 </script>
+<script>$(document).ready(function(){
+    if (typeof $('[data-toggle="tooltip"]').tooltip === 'function') {
+        $('[data-toggle="tooltip"]').tooltip();
+    }
+    if ($('[data-toggle="popover"]').popover === 'function') {
+        $('[data-toggle="popover"]').popover();
+    }
+});
+</script>
+<style type="text/css">
+.lightable-minimal {
+border-collapse: separate;
+border-spacing: 16px 1px;
+width: 100%;
+margin-bottom: 10px;
+}
+.lightable-minimal td {
+margin-left: 5px;
+margin-right: 5px;
+}
+.lightable-minimal th {
+margin-left: 5px;
+margin-right: 5px;
+}
+.lightable-minimal thead tr:last-child th {
+border-bottom: 2px solid #00000050;
+empty-cells: hide;
+}
+.lightable-minimal tbody tr:first-child td {
+padding-top: 0.5em;
+}
+.lightable-minimal.lightable-hover tbody tr:hover {
+background-color: #f5f5f5;
+}
+.lightable-minimal.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-classic {
+border-top: 0.16em solid #111111;
+border-bottom: 0.16em solid #111111;
+width: 100%;
+margin-bottom: 10px;
+margin: 10px 5px;
+}
+.lightable-classic tfoot tr td {
+border: 0;
+}
+.lightable-classic tfoot tr:first-child td {
+border-top: 0.14em solid #111111;
+}
+.lightable-classic caption {
+color: #222222;
+}
+.lightable-classic td {
+padding-left: 5px;
+padding-right: 5px;
+color: #222222;
+}
+.lightable-classic th {
+padding-left: 5px;
+padding-right: 5px;
+font-weight: normal;
+color: #222222;
+}
+.lightable-classic thead tr:last-child th {
+border-bottom: 0.10em solid #111111;
+}
+.lightable-classic.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-classic.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-classic-2 {
+border-top: 3px double #111111;
+border-bottom: 3px double #111111;
+width: 100%;
+margin-bottom: 10px;
+}
+.lightable-classic-2 tfoot tr td {
+border: 0;
+}
+.lightable-classic-2 tfoot tr:first-child td {
+border-top: 3px double #111111;
+}
+.lightable-classic-2 caption {
+color: #222222;
+}
+.lightable-classic-2 td {
+padding-left: 5px;
+padding-right: 5px;
+color: #222222;
+}
+.lightable-classic-2 th {
+padding-left: 5px;
+padding-right: 5px;
+font-weight: normal;
+color: #222222;
+}
+.lightable-classic-2 tbody tr:last-child td {
+border-bottom: 3px double #111111;
+}
+.lightable-classic-2 thead tr:last-child th {
+border-bottom: 1px solid #111111;
+}
+.lightable-classic-2.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-classic-2.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-material {
+min-width: 100%;
+white-space: nowrap;
+table-layout: fixed;
+font-family: Roboto, sans-serif;
+border: 1px solid #EEE;
+border-collapse: collapse;
+margin-bottom: 10px;
+}
+.lightable-material tfoot tr td {
+border: 0;
+}
+.lightable-material tfoot tr:first-child td {
+border-top: 1px solid #EEE;
+}
+.lightable-material th {
+height: 56px;
+padding-left: 16px;
+padding-right: 16px;
+}
+.lightable-material td {
+height: 52px;
+padding-left: 16px;
+padding-right: 16px;
+border-top: 1px solid #eeeeee;
+}
+.lightable-material.lightable-hover tbody tr:hover {
+background-color: #f5f5f5;
+}
+.lightable-material.lightable-striped tbody tr:nth-child(even) {
+background-color: #f5f5f5;
+}
+.lightable-material.lightable-striped tbody td {
+border: 0;
+}
+.lightable-material.lightable-striped thead tr:last-child th {
+border-bottom: 1px solid #ddd;
+}
+.lightable-material-dark {
+min-width: 100%;
+white-space: nowrap;
+table-layout: fixed;
+font-family: Roboto, sans-serif;
+border: 1px solid #FFFFFF12;
+border-collapse: collapse;
+margin-bottom: 10px;
+background-color: #363640;
+}
+.lightable-material-dark tfoot tr td {
+border: 0;
+}
+.lightable-material-dark tfoot tr:first-child td {
+border-top: 1px solid #FFFFFF12;
+}
+.lightable-material-dark th {
+height: 56px;
+padding-left: 16px;
+padding-right: 16px;
+color: #FFFFFF60;
+}
+.lightable-material-dark td {
+height: 52px;
+padding-left: 16px;
+padding-right: 16px;
+color: #FFFFFF;
+border-top: 1px solid #FFFFFF12;
+}
+.lightable-material-dark.lightable-hover tbody tr:hover {
+background-color: #FFFFFF12;
+}
+.lightable-material-dark.lightable-striped tbody tr:nth-child(even) {
+background-color: #FFFFFF12;
+}
+.lightable-material-dark.lightable-striped tbody td {
+border: 0;
+}
+.lightable-material-dark.lightable-striped thead tr:last-child th {
+border-bottom: 1px solid #FFFFFF12;
+}
+.lightable-paper {
+width: 100%;
+margin-bottom: 10px;
+color: #444;
+}
+.lightable-paper tfoot tr td {
+border: 0;
+}
+.lightable-paper tfoot tr:first-child td {
+border-top: 1px solid #00000020;
+}
+.lightable-paper thead tr:last-child th {
+color: #666;
+vertical-align: bottom;
+border-bottom: 1px solid #00000020;
+line-height: 1.15em;
+padding: 10px 5px;
+}
+.lightable-paper td {
+vertical-align: middle;
+border-bottom: 1px solid #00000010;
+line-height: 1.15em;
+padding: 7px 5px;
+}
+.lightable-paper.lightable-hover tbody tr:hover {
+background-color: #F9EEC1;
+}
+.lightable-paper.lightable-striped tbody tr:nth-child(even) {
+background-color: #00000008;
+}
+.lightable-paper.lightable-striped tbody td {
+border: 0;
+}
+</style>
 
 <style type="text/css">
 code{white-space: pre-wrap;}
@@ -1744,11 +1968,462 @@ representa a la entidad.</p></li>
 <span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>                                <span class="st">&quot;San Luis Potosí&quot;</span>,<span class="st">&quot;Sinaloa&quot;</span>,<span class="st">&quot;Sonora&quot;</span>,<span class="st">&quot;Tabasco&quot;</span>,<span class="st">&quot;Tamaulipas&quot;</span>,<span class="st">&quot;Tlaxcala&quot;</span>,<span class="st">&quot;Veracruz&quot;</span>,<span class="st">&quot;Yucatán&quot;</span>,<span class="st">&quot;Zacatecas&quot;</span>),</span>
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>                     <span class="at">abv =</span> <span class="fu">c</span>(<span class="st">&quot;ags&quot;</span>,<span class="st">&quot;bc&quot;</span>,<span class="st">&quot;bcs&quot;</span>,<span class="st">&quot;cam&quot;</span>,<span class="st">&quot;coa&quot;</span>,<span class="st">&quot;col&quot;</span>,<span class="st">&quot;chs&quot;</span>,<span class="st">&quot;chh&quot;</span>,<span class="st">&quot;cdmx&quot;</span>,<span class="st">&quot;dgo&quot;</span>,<span class="st">&quot;gto&quot;</span>,<span class="st">&quot;gro&quot;</span>,<span class="st">&quot;hgo&quot;</span>,<span class="st">&quot;jal&quot;</span>,<span class="st">&quot;mex&quot;</span>,<span class="st">&quot;mich&quot;</span>,<span class="st">&quot;mor&quot;</span>,</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>                             <span class="st">&quot;nay&quot;</span>,<span class="st">&quot;nl&quot;</span>,<span class="st">&quot;oax&quot;</span>,<span class="st">&quot;pue&quot;</span>,<span class="st">&quot;qro&quot;</span>,<span class="st">&quot;qroo&quot;</span>,<span class="st">&quot;slp&quot;</span>,<span class="st">&quot;sin&quot;</span>,<span class="st">&quot;son&quot;</span>,<span class="st">&quot;tab&quot;</span>,<span class="st">&quot;tam&quot;</span>,<span class="st">&quot;tla&quot;</span>,<span class="st">&quot;ver&quot;</span>,<span class="st">&quot;yuc&quot;</span>,<span class="st">&quot;zac&quot;</span>))</span></code></pre></div>
+<div id="bgrtipkfvm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#bgrtipkfvm table {
+font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+#bgrtipkfvm thead, #bgrtipkfvm tbody, #bgrtipkfvm tfoot, #bgrtipkfvm tr, #bgrtipkfvm td, #bgrtipkfvm th {
+border-style: none;
+}
+#bgrtipkfvm p {
+margin: 0;
+padding: 0;
+}
+#bgrtipkfvm .gt_table {
+display: table;
+border-collapse: collapse;
+line-height: normal;
+margin-left: auto;
+margin-right: auto;
+color: #333333;
+font-size: 8px;
+font-weight: normal;
+font-style: normal;
+background-color: #FFFFFF;
+width: 50%;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #A8A8A8;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #A8A8A8;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+}
+#bgrtipkfvm .gt_caption {
+padding-top: 4px;
+padding-bottom: 4px;
+}
+#bgrtipkfvm .gt_title {
+color: #333333;
+font-size: 12px;
+font-weight: initial;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-color: #FFFFFF;
+border-bottom-width: 0;
+}
+#bgrtipkfvm .gt_subtitle {
+color: #333333;
+font-size: 85%;
+font-weight: initial;
+padding-top: 3px;
+padding-bottom: 5px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-color: #FFFFFF;
+border-top-width: 0;
+}
+#bgrtipkfvm .gt_heading {
+background-color: #FFFFFF;
+text-align: center;
+border-bottom-color: #FFFFFF;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#bgrtipkfvm .gt_bottom_border {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#bgrtipkfvm .gt_col_headings {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+}
+#bgrtipkfvm .gt_col_heading {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 6px;
+padding-left: 5px;
+padding-right: 5px;
+overflow-x: hidden;
+}
+#bgrtipkfvm .gt_column_spanner_outer {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: normal;
+text-transform: inherit;
+padding-top: 0;
+padding-bottom: 0;
+padding-left: 4px;
+padding-right: 4px;
+}
+#bgrtipkfvm .gt_column_spanner_outer:first-child {
+padding-left: 0;
+}
+#bgrtipkfvm .gt_column_spanner_outer:last-child {
+padding-right: 0;
+}
+#bgrtipkfvm .gt_column_spanner {
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: bottom;
+padding-top: 5px;
+padding-bottom: 5px;
+overflow-x: hidden;
+display: inline-block;
+width: 100%;
+}
+#bgrtipkfvm .gt_spanner_row {
+border-bottom-style: hidden;
+}
+#bgrtipkfvm .gt_group_heading {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+text-align: left;
+}
+#bgrtipkfvm .gt_empty_group_heading {
+padding: 0.5px;
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+vertical-align: middle;
+}
+#bgrtipkfvm .gt_from_md > :first-child {
+margin-top: 0;
+}
+#bgrtipkfvm .gt_from_md > :last-child {
+margin-bottom: 0;
+}
+#bgrtipkfvm .gt_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+margin: 10px;
+border-top-style: solid;
+border-top-width: 1px;
+border-top-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 1px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 1px;
+border-right-color: #D3D3D3;
+vertical-align: middle;
+overflow-x: hidden;
+}
+#bgrtipkfvm .gt_stub {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+}
+#bgrtipkfvm .gt_stub_row_group {
+color: #333333;
+background-color: #FFFFFF;
+font-size: 100%;
+font-weight: initial;
+text-transform: inherit;
+border-right-style: solid;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+padding-left: 5px;
+padding-right: 5px;
+vertical-align: top;
+}
+#bgrtipkfvm .gt_row_group_first td {
+border-top-width: 2px;
+}
+#bgrtipkfvm .gt_row_group_first th {
+border-top-width: 2px;
+}
+#bgrtipkfvm .gt_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#bgrtipkfvm .gt_first_summary_row {
+border-top-style: solid;
+border-top-color: #D3D3D3;
+}
+#bgrtipkfvm .gt_first_summary_row.thick {
+border-top-width: 2px;
+}
+#bgrtipkfvm .gt_last_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#bgrtipkfvm .gt_grand_summary_row {
+color: #333333;
+background-color: #FFFFFF;
+text-transform: inherit;
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#bgrtipkfvm .gt_first_grand_summary_row {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-top-style: double;
+border-top-width: 6px;
+border-top-color: #D3D3D3;
+}
+#bgrtipkfvm .gt_last_grand_summary_row_top {
+padding-top: 8px;
+padding-bottom: 8px;
+padding-left: 5px;
+padding-right: 5px;
+border-bottom-style: double;
+border-bottom-width: 6px;
+border-bottom-color: #D3D3D3;
+}
+#bgrtipkfvm .gt_striped {
+background-color: rgba(128, 128, 128, 0.05);
+}
+#bgrtipkfvm .gt_table_body {
+border-top-style: solid;
+border-top-width: 2px;
+border-top-color: #D3D3D3;
+border-bottom-style: solid;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+}
+#bgrtipkfvm .gt_footnotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#bgrtipkfvm .gt_footnote {
+margin: 0px;
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#bgrtipkfvm .gt_sourcenotes {
+color: #333333;
+background-color: #FFFFFF;
+border-bottom-style: none;
+border-bottom-width: 2px;
+border-bottom-color: #D3D3D3;
+border-left-style: none;
+border-left-width: 2px;
+border-left-color: #D3D3D3;
+border-right-style: none;
+border-right-width: 2px;
+border-right-color: #D3D3D3;
+}
+#bgrtipkfvm .gt_sourcenote {
+font-size: 90%;
+padding-top: 4px;
+padding-bottom: 4px;
+padding-left: 5px;
+padding-right: 5px;
+}
+#bgrtipkfvm .gt_left {
+text-align: left;
+}
+#bgrtipkfvm .gt_center {
+text-align: center;
+}
+#bgrtipkfvm .gt_right {
+text-align: right;
+font-variant-numeric: tabular-nums;
+}
+#bgrtipkfvm .gt_font_normal {
+font-weight: normal;
+}
+#bgrtipkfvm .gt_font_bold {
+font-weight: bold;
+}
+#bgrtipkfvm .gt_font_italic {
+font-style: italic;
+}
+#bgrtipkfvm .gt_super {
+font-size: 65%;
+}
+#bgrtipkfvm .gt_footnote_marks {
+font-size: 75%;
+vertical-align: 0.4em;
+position: initial;
+}
+#bgrtipkfvm .gt_asterisk {
+font-size: 100%;
+vertical-align: 0;
+}
+#bgrtipkfvm .gt_indent_1 {
+text-indent: 5px;
+}
+#bgrtipkfvm .gt_indent_2 {
+text-indent: 10px;
+}
+#bgrtipkfvm .gt_indent_3 {
+text-indent: 15px;
+}
+#bgrtipkfvm .gt_indent_4 {
+text-indent: 20px;
+}
+#bgrtipkfvm .gt_indent_5 {
+text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Tabla de Estados de México</td>
+    </tr>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Clave">Clave</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Estado">Estado</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Abreviatura">Abreviatura</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="cve" class="gt_row gt_center">01</td>
+<td headers="estado" class="gt_row gt_center">Aguascalientes</td>
+<td headers="abv" class="gt_row gt_center">ags</td></tr>
+    <tr><td headers="cve" class="gt_row gt_center">02</td>
+<td headers="estado" class="gt_row gt_center">Baja California</td>
+<td headers="abv" class="gt_row gt_center">bc</td></tr>
+    <tr><td headers="cve" class="gt_row gt_center">03</td>
+<td headers="estado" class="gt_row gt_center">Baja California Sur</td>
+<td headers="abv" class="gt_row gt_center">bcs</td></tr>
+    <tr><td headers="cve" class="gt_row gt_center">04</td>
+<td headers="estado" class="gt_row gt_center">Campeche</td>
+<td headers="abv" class="gt_row gt_center">cam</td></tr>
+    <tr><td headers="cve" class="gt_row gt_center">05</td>
+<td headers="estado" class="gt_row gt_center">Coahuila</td>
+<td headers="abv" class="gt_row gt_center">coa</td></tr>
+    <tr><td headers="cve" class="gt_row gt_center">06</td>
+<td headers="estado" class="gt_row gt_center">Colima</td>
+<td headers="abv" class="gt_row gt_center">col</td></tr>
+    <tr><td headers="cve" class="gt_row gt_center">07</td>
+<td headers="estado" class="gt_row gt_center">Chiapas</td>
+<td headers="abv" class="gt_row gt_center">chs</td></tr>
+    <tr><td headers="cve" class="gt_row gt_center">08</td>
+<td headers="estado" class="gt_row gt_center">Chihuahua</td>
+<td headers="abv" class="gt_row gt_center">chh</td></tr>
+    <tr><td headers="cve" class="gt_row gt_center">09</td>
+<td headers="estado" class="gt_row gt_center">Ciudad de México</td>
+<td headers="abv" class="gt_row gt_center">cdmx</td></tr>
+    <tr><td headers="cve" class="gt_row gt_center">10</td>
+<td headers="estado" class="gt_row gt_center">Durango</td>
+<td headers="abv" class="gt_row gt_center">dgo</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<ul>
+<li>Se crea un archivo temporal <code>temfile()</code> en el sistema
+operativo y devuelve su nombre (una ruta completa al archivo
+temporal.</li>
+<li>Se filtran o seleccionan columnas importantes para el análisis,
+reduciendo el tamaño de los datos y enfocarse en las variables
+relevantes.</li>
+<li><code>options(timeout = 100)</code>: Configuración de una opción
+para aumentar el tiempo de espera al descargar un archivo (en este caso,
+el archivo de Oaxaca tarda más en descargarse).</li>
+</ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>temp <span class="ot">&lt;-</span> <span class="fu">tempfile</span>()</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>tokeep <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;ID_VIV&quot;</span>, <span class="st">&quot;ID_PERSONA&quot;</span>, <span class="st">&quot;ENT&quot;</span>, <span class="st">&quot;MUN&quot;</span>, <span class="st">&quot;FACTOR&quot;</span>, <span class="st">&quot;SEXO&quot;</span>, <span class="st">&quot;EDAD&quot;</span>, <span class="st">&quot;ASISTEN&quot;</span>, <span class="st">&quot;ESCOLARI&quot;</span>, <span class="st">&quot;NIVACAD&quot;</span>, <span class="st">&quot;ALFABET&quot;</span>, <span class="st">&quot;ESCOACUM&quot;</span>, <span class="st">&quot;CONACT&quot;</span>, <span class="st">&quot;UPM&quot;</span>, <span class="st">&quot;ESTRATO&quot;</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a><span class="fu">options</span>(<span class="at">timeout =</span> <span class="dv">100</span>) <span class="co">#El archivo de Oaxaca tarda más que el resto y necesista extender el tiempo de respuesta </span></span></code></pre></div>
+<p>Se realiza un proceso iterativo para descargar, procesar y guardar
+datos del Censo de Población y Vivienda 2020 del INEGI para cada una de
+las 32 entidades federativas de México.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">32</span>){</span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>  <span class="fu">download.file</span>(<span class="fu">paste0</span>(<span class="st">&quot;https://www.inegi.org.mx/contenidos/programas/ccpv/2020/microdatos/Censo2020_CA_&quot;</span>, abrevs[i,<span class="st">&quot;abv&quot;</span>], <span class="st">&quot;_csv.zip&quot;</span>), temp)</span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  <span class="co">#print(paste0(&quot;Personas&quot;,i,&quot;.CSV&quot;))</span></span>
@@ -1760,6 +2435,17 @@ representa a la entidad.</p></li>
 <span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>  <span class="fu">assign</span>(<span class="fu">paste0</span>(<span class="st">&quot;Personas&quot;</span>, abrevs[i,<span class="st">&quot;cve&quot;</span>]), doc)</span>
 <span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>  <span class="fu">unlink</span>(temp)</span>
 <span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>}</span></code></pre></div>
+<p>Después de ejecutar el bucle, tendrás 32 objetos en tu espacio de
+trabajo, uno para cada entidad, con los nombres <code>Personas01</code>,
+<code>Personas02</code>, …, <code>Personas32</code>. Cada objeto
+contiene las columnas relevantes y datos procesados del Censo 2020 para
+la entidad correspondiente.</p>
+<p>Utilizando la función <code>bind_rows</code>, se consolida un
+data.frame que contiene los datos del Censo 2020 para las 32 entidades
+federativas, con las columnas especificadas.</p>
+<p>El archivo “<strong>Base Completa Censo de población y vivienda
+2020.Rda</strong>” contendrá el objeto <code>base_completa</code> y
+podrá ser reutilizado sin necesidad de repetir el procesamiento.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>base_completa <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(<span class="fu">mget</span>(<span class="fu">ls</span>(<span class="at">pattern =</span> <span class="st">&quot;Personas&quot;</span>)))</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">save</span>(base_completa, <span class="at">file=</span><span class="st">&quot;Base Completa Censo de población y vivienda 2020.Rda&quot;</span>)</span></code></pre></div>
 </div>
@@ -1769,6 +2455,67 @@ representa a la entidad.</p></li>
 transformaciones locales en México | Programa De Las Naciones Unidas
 Para El Desarrollo. (2023). Retrieved January 19, 2025, from <a href="https://www.undp.org/es/mexico/publicaciones/informe-de-desarrollo-humano-municipal-2010-2020-una-decada-de-transformaciones-locales-en-mexico-0" class="uri">https://www.undp.org/es/mexico/publicaciones/informe-de-desarrollo-humano-municipal-2010-2020-una-decada-de-transformaciones-locales-en-mexico-0</a></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>sesion_info <span class="ot">&lt;-</span> devtools<span class="sc">::</span><span class="fu">session_info</span>()</span></code></pre></div>
+<table class=" lightable-classic" style="font-size: 10px; font-family: montserrat; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+package
+</th>
+<th style="text-align:left;">
+loadedversion
+</th>
+<th style="text-align:left;">
+source
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+dplyr
+</td>
+<td style="text-align:left;">
+1.1.3
+</td>
+<td style="text-align:left;">
+CRAN (R 4.3.2)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+gt
+</td>
+<td style="text-align:left;">
+0.10.0
+</td>
+<td style="text-align:left;">
+CRAN (R 4.3.1)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+kableExtra
+</td>
+<td style="text-align:left;">
+1.3.4
+</td>
+<td style="text-align:left;">
+CRAN (R 4.3.1)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+knitr
+</td>
+<td style="text-align:left;">
+1.45
+</td>
+<td style="text-align:left;">
+CRAN (R 4.3.2)
+</td>
+</tr>
+</tbody>
+</table>
 <p><a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img role="img" aria-label="Creative Commons Licence" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFgAAAAfCAMAAABUFvrSAAAAAXNSR0IB2cksfwAAAARnQU1BAACxjnz7UZMAAAAgY0hSTQAAeiUAAICDAAD5/wAAgOkAAHUwAADqYAAAOpgAABdvkl/FRgAAAW5QTFRFAAAAAAAA////////////7+/v39/f1tXV09bS0tXS0tXR0dTR0dTQ0NTQ0NPPz9PPztLOztHNzdHNzdHMz8/PzdDMzNDMzNDLzM/Ly8/Ly8/Ky87Kys3Jyc3Jyc3IyMzIyMzHx8vHxsrGxsrFxcnFxcnExMnExMjDw8jDxMfDw8fCwsfCwcXAwMXAwMW/wMS/v8S+v8O+vsO+vsK9vcK9vcK8v7+/vMG8vMG7vMC8u8C7u8C6ur+6ur+5ub65ub64uL23t7y2tru1tbq0tLqztLmzs7iysrixsrexsbewsbawsLavsLWvr7Wur7SusLOvrrStrrOtr7KvrbOsrLKrr6+vq7Gqn6OenqCdn5+flpmWk5iTkZSRkZORj4+PiYyJhIaEhIWEgoWCgICAfX98fH98eXx5cHJvcHBwYGBgXV5dUFFQUFBQQ0RDQEBAPj8+NTY1MjMxMDAwKSkpKCkoICAgGxsbEBAQDg4ODQ4N2y3MbAAAAAR0Uk5T/wAKDnDBpeYAAALVSURBVHjatZX9V9JgFMdvNQh1Tme2zU1othSl5WsQZoqIrxmmqaUpqS2JKczibfLfd5+hHCYybB6/B859ftg+5+57Xx54Ag+iR/hPxGPRSXVYkf2SwHGC2C8rQXUiOhdPLK992tze3vn6/wKLOxseCykBkWXoNp+vrYNh+wJKaDQ8S8jJze0dl2TkvgkOSCx9kqsAqpI7prtFeUh9i+SV9eRWY8rpAqAKaWdwDLkyz6TKUFP5kOECg2p4Lr60ut6Q8kERwMhkDIDigRM4OhaUOfocT6auRSKabuLxfORZYGg0GltAM26k/O0Ssl4K5c3C5YEDeDI0wBOuqXmoqvYRXRzh5NDEzHwCU7aDi6DjMwDkQSg6gFVFYpCb91I1efKYMyMqahhT/rhh8yIN2adVMCoL6ebg4RdsCrmYrp182B0Ijs/EF1eTW/XgAtRl4IVCc7Ai0mUweymbPCaU6T5FfRdLrNi9AINC6QA6iQY0B8s9JwCanUvsg2NWDk3Nohd2cIZCAYrEjAPY35UDE42IZA1Dq4Yf+IoJOaafeLG0tuEOLNEV0BEIRMauFXTysZUOcXD0/fziWtKdFUI7AKaYh5I3UtrPY3vslvYtL9oERY1iwyG4oXgALYvH+wAiFGX5XAvWF/i4l41gbDfKod3cgu0DksEBuYsVnt6ShlaQ0GCF00g7F++qaleBZFOhpcbiEXIRIK9n8q2WkL/rHEyq1m67hhWoErabPzj+odpubtam3JNCL24fkNdTcwvLZPLcLPpX1kh7HUbaJRiX0N5tSyjFBoYncPDIEnIFhlOJOUNy3RryWmtT+gn31G+hs37RezQT4A/Nn8K99YvrPLtxNdHPv0MzVeeDHFqTBWav/jJNMXxzLlBXP+oubkgsnbq+/g9pVnLy4Xptwl3094vY00W3+3ztNMP2fb4AB9mMaK2Lo2lJ4HlBmj4iWLcZP7wePwz20T8rQcP0CuFIbQAAAABJRU5ErkJggg==" alt="Creative Commons Licence" style="border-width:0" /></a><br />This
 work by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName"><strong>Diana Villasana
 Ocampo</strong></span> is licensed under a

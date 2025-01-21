@@ -16,7 +16,7 @@ output:
 
 ```{r, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, cache.lazy = FALSE, 
-                         eval = FALSE, class.source = "fold-show")
+                         eval = TRUE, class.source = "fold-show")
 knitr::opts_knit$set(root.dir = rprojroot::find_rstudio_root_file())
 options(digits = 2, encoding = "UTF8")
 ```
@@ -28,6 +28,14 @@ rm(list = ls())
 ```{r, echo=FALSE}
 setwd(here::here())
 ```
+
+```{r, echo = FALSE}
+require(dplyr)
+require(gt)
+require(knitr)
+require(kableExtra)
+```
+
 
 ## Informe de Desarrollo Humano Municipal 2010-2020: una década de transformaciones locales en México
 
@@ -67,6 +75,7 @@ Se crea un data frame que contiene información sobre las *32 entidades federati
 
 -   `abv`: Una abreviatura de tres caracteres que representa a la entidad.
 
+
 ```{r}
 abrevs <- data.frame(cve = sprintf("%02d", as.numeric(1:32)),
                      estado = c("Aguascalientes","Baja California","Baja California Sur","Campeche","Coahuila","Colima","Chiapas",
@@ -77,7 +86,32 @@ abrevs <- data.frame(cve = sprintf("%02d", as.numeric(1:32)),
                              "nay","nl","oax","pue","qro","qroo","slp","sin","son","tab","tam","tla","ver","yuc","zac"))
 ```
 
-```{r}
+
+```{r, echo = FALSE}
+require(gt)
+tabla <- abrevs %>%
+          slice(1:10) %>% 
+           gt() %>%
+            tab_header( title = "Tabla de Estados de México") %>%
+             cols_align(align = "center") %>%
+              cols_label(cve = "Clave",
+                        estado = "Estado",
+                        abv = "Abreviatura"
+                       ) %>%
+               tab_options(
+                           table.width = pct(50), # Ajustar el ancho de la tabla
+                           table.align = "center", # Centrar la tabla
+                           table.font.size = 8, 
+                           heading.title.font.size = 12
+            )
+tabla
+```
+
+-   Se crea un archivo temporal `temfile()` en el sistema operativo y devuelve su nombre (una ruta completa al archivo temporal.
+-   Se filtran o seleccionan columnas importantes para el análisis, reduciendo el tamaño de los datos y enfocarse en las variables relevantes.
+-   `options(timeout = 100)`: Configuración de una opción para aumentar el tiempo de espera al descargar un archivo (en este caso, el archivo de Oaxaca tarda más en descargarse).
+
+```{r, eval = FALSE}
 temp <- tempfile()
 
 tokeep <- c("ID_VIV", "ID_PERSONA", "ENT", "MUN", "FACTOR", "SEXO", "EDAD", "ASISTEN", "ESCOLARI", "NIVACAD", "ALFABET", "ESCOACUM", "CONACT", "UPM", "ESTRATO")
@@ -85,7 +119,9 @@ tokeep <- c("ID_VIV", "ID_PERSONA", "ENT", "MUN", "FACTOR", "SEXO", "EDAD", "ASI
 options(timeout = 100) #El archivo de Oaxaca tarda más que el resto y necesista extender el tiempo de respuesta 
 ```
 
-```{r}
+Se realiza un proceso iterativo para descargar, procesar y guardar datos del Censo de Población y Vivienda 2020 del INEGI para cada una de las 32 entidades federativas de México.
+
+```{r, eval = FALSE}
 for (i in 1:32){
   download.file(paste0("https://www.inegi.org.mx/contenidos/programas/ccpv/2020/microdatos/Censo2020_CA_", abrevs[i,"abv"], "_csv.zip"), temp)
   #print(paste0("Personas",i,".CSV"))
@@ -99,7 +135,13 @@ for (i in 1:32){
 }
 ```
 
-```{r}
+Después de ejecutar el bucle, tendrás 32 objetos en tu espacio de trabajo, uno para cada entidad, con los nombres `Personas01`, `Personas02`, ..., `Personas32`. Cada objeto contiene las columnas relevantes y datos procesados del Censo 2020 para la entidad correspondiente.
+
+Utilizando la función `bind_rows`, se consolida un data.frame que contiene los datos del Censo 2020 para las 32 entidades federativas, con las columnas especificadas.
+
+El archivo "**Base Completa Censo de población y vivienda 2020.Rda**" contendrá el objeto `base_completa` y podrá ser reutilizado sin necesidad de repetir el procesamiento.
+
+```{r, eval = FALSE}
 base_completa <- bind_rows(mget(ls(pattern = "Personas")))
 save(base_completa, file="Base Completa Censo de población y vivienda 2020.Rda")
 ```
