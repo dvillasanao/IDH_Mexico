@@ -31,7 +31,7 @@ setwd(here::here())
 
 ## Informe de Desarrollo Humano Municipal 2010-2020: una década de transformaciones locales en México  
 
-Este informe, elaborado por el Programa de las Naciones Unidas para el Desarrollo (PNUD), presenta un análisis detallado de los avances y desafíos en materia de desarrollo humano en los municipios mexicanos durante la década de 2010 a 2020.
+Este informe, elaborado por el Programa de las Naciones Unidas para el Desarrollo (`PNUD`), presenta un análisis detallado de los avances y desafíos en materia de desarrollo humano en los municipios mexicanos durante la década de 2010 a 2020. A continuación se desarrolla la metodología desarrollada por el Programa de las Naciones Unidas para el Desarrollo [(PNUD)](https://www.undp.org/es/mexico/publicaciones/informe-de-desarrollo-humano-municipal-2010-2020-una-decada-de-transformaciones-locales-en-mexico-0). 
 
 **Implicaciones**:
 
@@ -39,7 +39,7 @@ Los resultados de este informe ofrecen un panorama completo de la situación del
 
 **Censo de Población y Vivienda 2020**   
 
-El Censo de Población y Vivienda 2020, proporciona una gran cantidad de información que es esencial para calcular el IDH y evaluar el progreso en materia de desarrollo humano. Al analizar estos indicadores, podemos identificar las fortalezas y debilidades de un país y diseñar políticas públicas más efectivas para mejorar la calidad de vida de la población.
+El Censo de Población y Vivienda 2020, proporciona una gran cantidad de información que es esencial para calcular el `IDH` y evaluar el progreso en materia de desarrollo humano. Al analizar estos indicadores, podemos identificar las fortalezas y debilidades de un país y diseñar políticas públicas más efectivas para mejorar la calidad de vida de la población.
 
 Se descargan de los microdatos por estado del cuestionario ampliado del Censo Nacional de Población y Vivienda 2020 (INEGI).   
 

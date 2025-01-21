@@ -38,6 +38,9 @@ require(stringr)
 #library(foreign)
 ```
 
+## Índice de Desarrollo Humano (`IDH`)   
+
+
 ##  Cálculo del subíndice de Educación 2020          
 
 ### Recolección de datos
