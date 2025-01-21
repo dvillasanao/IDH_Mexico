@@ -45,11 +45,11 @@ El Índice de Desarrollo Humano (IDH) y los Objetivos de Desarrollo Sostenible (
 
 -   **ODS 2: Hambre cero**: La alimentación adecuada es esencial para una vida saludable, un componente clave del IDH.
 
--   **ODS 3: Salud y bienestar**: La esperanza de vida al nacer, uno de los componentes del IDH, está directamente relacionada con el ODS 3.**
+-   **ODS 3: Salud y bienestar**: La esperanza de vida al nacer, uno de los componentes del IDH, está directamente relacionada con el ODS 3.\*\*
 
 -   **ODS 4: Educación de calidad**: El acceso a la educación y los años promedio de escolaridad son indicadores importantes tanto para el IDH como para el ODS 4.
 
--   **ODS 10: Reducción de las desigualdades**: El IDH también considera las desigualdades en el desarrollo humano.**
+-   **ODS 10: Reducción de las desigualdades**: El IDH también considera las desigualdades en el desarrollo humano.\*\*
 
 -   **ODS 11: Ciudades y comunidades sostenibles**: El acceso a servicios básicos como agua potable y saneamiento, que influyen en la calidad de vida, está relacionado con este ODS.
 
@@ -58,6 +58,14 @@ El Índice de Desarrollo Humano (IDH) y los Objetivos de Desarrollo Sostenible (
 El Censo de Población y Vivienda 2020, proporciona una gran cantidad de información que es esencial para calcular el `IDH` y evaluar el progreso en materia de desarrollo humano. Al analizar estos indicadores, podemos identificar las fortalezas y debilidades de un país y diseñar políticas públicas más efectivas para mejorar la calidad de vida de la población.
 
 Se descargan de los microdatos por estado del cuestionario ampliado del Censo Nacional de Población y Vivienda 2020 (INEGI).
+
+Se crea un data frame que contiene información sobre las *32 entidades federativas* de México. Cada fila del data frame representa una entidad y contiene tres columnas:
+
+-   `cve`: La clave numérica de la entidad federativa, formateada con dos dígitos.
+
+-   `estado`: El nombre completo de la entidad federativa.
+
+-   `abv`: Una abreviatura de tres caracteres que representa a la entidad.
 
 ```{r}
 abrevs <- data.frame(cve = sprintf("%02d", as.numeric(1:32)),

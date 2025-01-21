@@ -1726,6 +1726,17 @@ y diseñar políticas públicas más efectivas para mejorar la calidad de
 vida de la población.</p>
 <p>Se descargan de los microdatos por estado del cuestionario ampliado
 del Censo Nacional de Población y Vivienda 2020 (INEGI).</p>
+<p>Se crea un data frame que contiene información sobre las <em>32
+entidades federativas</em> de México. Cada fila del data frame
+representa una entidad y contiene tres columnas:</p>
+<ul>
+<li><p><code>cve</code>: La clave numérica de la entidad federativa,
+formateada con dos dígitos.</p></li>
+<li><p><code>estado</code>: El nombre completo de la entidad
+federativa.</p></li>
+<li><p><code>abv</code>: Una abreviatura de tres caracteres que
+representa a la entidad.</p></li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>abrevs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">cve =</span> <span class="fu">sprintf</span>(<span class="st">&quot;%02d&quot;</span>, <span class="fu">as.numeric</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">32</span>)),</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>                     <span class="at">estado =</span> <span class="fu">c</span>(<span class="st">&quot;Aguascalientes&quot;</span>,<span class="st">&quot;Baja California&quot;</span>,<span class="st">&quot;Baja California Sur&quot;</span>,<span class="st">&quot;Campeche&quot;</span>,<span class="st">&quot;Coahuila&quot;</span>,<span class="st">&quot;Colima&quot;</span>,<span class="st">&quot;Chiapas&quot;</span>,</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>                                <span class="st">&quot;Chihuahua&quot;</span>, <span class="st">&quot;Ciudad de México&quot;</span>,<span class="st">&quot;Durango&quot;</span>,<span class="st">&quot;Guanajuato&quot;</span>,<span class="st">&quot;Guerrero&quot;</span>,<span class="st">&quot;Hidalgo&quot;</span>,<span class="st">&quot;Jalisco&quot;</span>,</span>
