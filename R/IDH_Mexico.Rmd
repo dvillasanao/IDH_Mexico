@@ -29,13 +29,17 @@ rm(list = ls())
 setwd(here::here())
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval = TRUE}
 library(tidyverse)
 library(readxl)
 library(writexl)
 require(stringr)
-#library(haven)
-#library(foreign)
+library(haven)
+library(foreign)
+require(dplyr)
+require(gt)
+require(knitr)
+require(kableExtra)
 ```
 
 ## Índice de Desarrollo Humano (`IDH`)   
@@ -480,11 +484,11 @@ write_xlsx(idh_2020, paste0(here::here(), "/Bases/RESULTADOS IDH 2020.xlsx"))
 
 Informe de Desarrollo Humano Municipal 2010-2020: una década de transformaciones locales en México | Programa De Las Naciones Unidas Para El Desarrollo. (2023). Retrieved January 19, 2025, from https://www.undp.org/es/mexico/publicaciones/informe-de-desarrollo-humano-municipal-2010-2020-una-decada-de-transformaciones-locales-en-mexico-0
 
-```{r, collapse=FALSE}
+```{r, collapse=FALSE, eval = TRUE}
 sesion_info <- devtools::session_info()
 ```
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, eval = TRUE}
 kable(dplyr::select(tibble::as_tibble(sesion_info$packages %>% dplyr::filter(attached == TRUE)),
                     c(package, loadedversion, source))) %>%
    kable_classic(full_width = TRUE, html_font = "montserrat", font_size = 10) 
