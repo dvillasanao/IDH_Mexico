@@ -29,19 +29,35 @@ rm(list = ls())
 setwd(here::here())
 ```
 
-## Informe de Desarrollo Humano Municipal 2010-2020: una década de transformaciones locales en México  
+## Informe de Desarrollo Humano Municipal 2010-2020: una década de transformaciones locales en México
 
-Este informe, elaborado por el Programa de las Naciones Unidas para el Desarrollo (`PNUD`), presenta un análisis detallado de los avances y desafíos en materia de desarrollo humano en los municipios mexicanos durante la década de 2010 a 2020. A continuación se desarrolla la metodología desarrollada por el Programa de las Naciones Unidas para el Desarrollo [(PNUD)](https://www.undp.org/es/mexico/publicaciones/informe-de-desarrollo-humano-municipal-2010-2020-una-decada-de-transformaciones-locales-en-mexico-0). 
+Este informe, elaborado por el Programa de las Naciones Unidas para el Desarrollo (`PNUD`), presenta un análisis detallado de los avances y desafíos en materia de desarrollo humano en los municipios mexicanos durante la década de 2010 a 2020. A continuación se desarrolla la metodología desarrollada por el Programa de las Naciones Unidas para el Desarrollo [(PNUD)](https://www.undp.org/es/mexico/publicaciones/informe-de-desarrollo-humano-municipal-2010-2020-una-decada-de-transformaciones-locales-en-mexico-0).
 
 **Implicaciones**:
 
-Los resultados de este informe ofrecen un panorama completo de la situación del desarrollo humano en México a nivel municipal. Esta información es fundamental para identificar las áreas de oportunidad, diseñar estrategias de intervención y monitorear los avances en la consecución de los Objetivos de Desarrollo Sostenible.  
+En el contexto mexicano, el PNUD ha generado más de 26 informes de desarrollo humano, siendo esta edición particularmente significativa al constituir el primer documento que examina una década completa de evolución en las condiciones de desarrollo humano a nivel municipal. Adicionalmente, este informe examina la correlación entre la progresión del desarrollo humano y las capacidades institucionales de los gobiernos municipales para implementar iniciativas de desarrollo sostenible desde el ámbito local.
 
-**Censo de Población y Vivienda 2020**   
+## Objetivos del Desarrollo Sostenible (`ODS`)
+
+El Índice de Desarrollo Humano (IDH) y los Objetivos de Desarrollo Sostenible (ODS) son dos herramientas complementarias que buscan medir y mejorar la calidad de vida de las personas en todo el mundo. Ambos se centran en aspectos multidimensionales del desarrollo humano, como la salud, la educación y el nivel de vida.
+
+-   **ODS 1: Fin de la pobreza**: El IDH mide el nivel de vida, que incluye aspectos relacionados con la pobreza, como el ingreso per cápita.
+
+-   **ODS 2: Hambre cero**: La alimentación adecuada es esencial para una vida saludable, un componente clave del IDH.
+
+-   **ODS 3: Salud y bienestar**: La esperanza de vida al nacer, uno de los componentes del IDH, está directamente relacionada con el ODS 3.**
+
+-   **ODS 4: Educación de calidad**: El acceso a la educación y los años promedio de escolaridad son indicadores importantes tanto para el IDH como para el ODS 4.
+
+-   **ODS 10: Reducción de las desigualdades**: El IDH también considera las desigualdades en el desarrollo humano.**
+
+-   **ODS 11: Ciudades y comunidades sostenibles**: El acceso a servicios básicos como agua potable y saneamiento, que influyen en la calidad de vida, está relacionado con este ODS.
+
+**Censo de Población y Vivienda 2020**
 
 El Censo de Población y Vivienda 2020, proporciona una gran cantidad de información que es esencial para calcular el `IDH` y evaluar el progreso en materia de desarrollo humano. Al analizar estos indicadores, podemos identificar las fortalezas y debilidades de un país y diseñar políticas públicas más efectivas para mejorar la calidad de vida de la población.
 
-Se descargan de los microdatos por estado del cuestionario ampliado del Censo Nacional de Población y Vivienda 2020 (INEGI).   
+Se descargan de los microdatos por estado del cuestionario ampliado del Censo Nacional de Población y Vivienda 2020 (INEGI).
 
 ```{r}
 abrevs <- data.frame(cve = sprintf("%02d", as.numeric(1:32)),
@@ -80,10 +96,9 @@ base_completa <- bind_rows(mget(ls(pattern = "Personas")))
 save(base_completa, file="Base Completa Censo de población y vivienda 2020.Rda")
 ```
 
+## Referencias
 
-## Referencias 
-
-Informe de Desarrollo Humano Municipal 2010-2020: una década de transformaciones locales en México | Programa De Las Naciones Unidas Para El Desarrollo. (2023). Retrieved January 19, 2025, from https://www.undp.org/es/mexico/publicaciones/informe-de-desarrollo-humano-municipal-2010-2020-una-decada-de-transformaciones-locales-en-mexico-0
+Informe de Desarrollo Humano Municipal 2010-2020: una década de transformaciones locales en México \| Programa De Las Naciones Unidas Para El Desarrollo. (2023). Retrieved January 19, 2025, from <https://www.undp.org/es/mexico/publicaciones/informe-de-desarrollo-humano-municipal-2010-2020-una-decada-de-transformaciones-locales-en-mexico-0>
 
 ```{r, collapse=FALSE}
 sesion_info <- devtools::session_info()
@@ -96,5 +111,3 @@ kable(dplyr::select(tibble::as_tibble(sesion_info$packages %>% dplyr::filter(att
 ```
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Creative Commons Licence" style="border-width:0"/></a><br />This work by [**Diana Villasana Ocampo**]{xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName"} is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
-
-
