@@ -56,13 +56,13 @@ En México, el IDH ha sido una herramienta clave para analizar las desigualdades
 </figure>  
 
 
-México ha mantenido un nivel de desarrollo humano clasificado como "alto" según los estándares del PNUD, aunque está por debajo del promedio de los países más desarrollados. Entre 1990 y 2022, el IDH de México ha crecido de manera sostenida, impulsado principalmente por mejoras en la esperanza de vida y la ampliación del acceso a la educación. Sin embargo, el crecimiento económico, aunque positivo, ha sido moderado y desigual, limitando el impacto de esta dimensión en el índice general.   
+México ha mantenido un nivel de desarrollo humano clasificado como "alto" según los estándares del `PNUD`, aunque está por debajo del promedio de los países más desarrollados. Entre 1990 y 2022, el IDH de México ha crecido de manera sostenida, impulsado principalmente por mejoras en la esperanza de vida y la ampliación del acceso a la educación. Sin embargo, el crecimiento económico, aunque positivo, ha sido moderado y desigual, limitando el impacto de esta dimensión en el índice general.   
 
 
 ### Desigualdades regionales  
 
 
-Existen marcadas diferencias en el IDH entre las entidades federativas y regiones del país. Estados como Nuevo León, Ciudad de México y Querétaro suelen registrar valores de IDH comparables a los de países desarrollados, mientras que entidades del sur como Chiapas, Oaxaca y Guerrero presentan niveles significativamente más bajos. Estas desigualdades reflejan brechas históricas en infraestructura, acceso a servicios básicos y oportunidades económicas.
+Existen marcadas diferencias en el `IDH` entre las entidades federativas y regiones del país. Estados como Nuevo León, Ciudad de México y Querétaro suelen registrar valores de IDH comparables a los de países desarrollados, mientras que entidades del sur como Chiapas, Oaxaca y Guerrero presentan niveles significativamente más bajos. Estas desigualdades reflejan brechas históricas en infraestructura, acceso a servicios básicos y oportunidades económicas.
 
 <figure>
   <img src="../Output/img01.png" alt="Descripción de la imagen" style="width:50%;">
