@@ -81,7 +81,15 @@ Para abordar estas desigualdades, las estrategias gubernamentales y el PNUD han 
 - Fortalecer programas contra la pobreza con enfoques específicos por territorio y población.
 - Impulsar la creación de empleos formales y bien remunerados. 
 
-El Índice de Desarrollo Humano (IDH), desarrollado por el Programa de las Naciones Unidas para el Desarrollo (PNUD), es una medida compuesta que evalúa el bienestar y el progreso humano en tres dimensiones clave:
+El Índice de Desarrollo Humano (`IDH`), desarrollado por el Programa de las Naciones Unidas para el Desarrollo (PNUD), es una medida compuesta que evalúa el bienestar y el progreso humano en tres dimensiones clave. El enfoque propuesto establece una perspectiva
+multidimensional que muestra las condiciones de desarrollo con base en una medición robusta que analiza dimensiones fundamentales del bienestar humano (PNUD, 1990). 
+El IDH analiza tres dimensiones esenciales para el bienestar humano: **la educación, la salud y los ingresos disponibles**.   
+
+- **La salud** se mide mediante la Esperanza de Vida al Nacer (`EVN`), que permite tener una aproximación de la longevidad, lo que refleja la capacidad de las personas para gozar de una buena salud y niveles adecuados de alimentación nutritiva y de calidad.
+
+- **La educación** se mide por medio de dos indicadores: los Años Esperados de Escolaridad (`AEE`) y los Años Promedio de Escolaridad (`APE`), que permiten identificar la capacidad de las personas para acceder al conocimiento, a la formación y a la capacitación.   
+
+- **El ingreso** se mide con el Producto Interno Bruto (`PIB`) per cápita ajustado por el poder adquisitivo, que permite conocer el crecimiento de la riqueza en un país, pero considerando la forma en que se distribuye entre su población.  
 
 ### Fórmula del `IDH`   
 
@@ -90,7 +98,12 @@ El `IDH` se calcula como el promedio geométrico de los índices normalizados de
     IDH = \sqrt[3]{I_{\text{salud}} \cdot I_{\text{educación}} \cdot I_{\text{ingreso}}}
     \]
 
-Cada dimensión se normaliza en una escala de $0$ a $1$, utilizando valores mínimos y máximos predefinidos, lo que permite comparar diferentes regiones o países.  
+Cada dimensión se normaliza en una escala de $0$ a $1$, utilizando valores mínimos y máximos predefinidos, lo que permite comparar diferentes regiones o países.   
+
+En México, el PNUD publicó el primer Informe de Desarrollo Humano en 2002; desde entonces, las estimaciones y cálculos del IDH en el país se han fortalecido con su vinculación con diversos cálculos relacionados con otras problemáticas del desarrollo en distintos ámbitos de desagregación territorial, como el género, el mercado laboral, la equidad del gasto público, los derechos sociales y la movilidad social, entre otros.   
+
+En el ámbito mundial, este método de cálculo toma como referencia los valores
+internacionales de los indicadores utilizados para calcular el IDH y sus dimensiones
 
 ###  Cálculo del subíndice de Educación     
 
