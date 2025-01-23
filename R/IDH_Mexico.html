@@ -1920,6 +1920,7 @@ permanecen significativas.</p>
 Fuente: Informe del Desarrollo Humano 2020, (PNUD).
 </figcaption>
 </figure>
+<p></br></p>
 <p>México ha mantenido un nivel de desarrollo humano clasificado como
 “alto” según los estándares del <code>PNUD</code>, aunque está por
 debajo del promedio de los países más desarrollados. Entre 1990 y 2022,
@@ -1944,33 +1945,83 @@ económicas.</p>
 Fuente: Informe del Desarrollo Humano municipal 2010 - 2020, (PNUD).
 </figcaption>
 </figure>
+<p></br></p>
+<p><strong>Estrategias</strong></p>
+<p>Para abordar estas desigualdades, las estrategias gubernamentales y
+el PNUD han destacado como prioritario:</p>
+<ul>
+<li>Invertir en educación de calidad, especialmente en las regiones más
+rezagadas.</li>
+<li>Implementar políticas de salud inclusivas y efectivas.</li>
+<li>Fortalecer programas contra la pobreza con enfoques específicos por
+territorio y población.</li>
+<li>Impulsar la creación de empleos formales y bien remunerados.</li>
+</ul>
+<p>El Índice de Desarrollo Humano (IDH), desarrollado por el Programa de
+las Naciones Unidas para el Desarrollo (PNUD), es una medida compuesta
+que evalúa el bienestar y el progreso humano en tres dimensiones
+clave:</p>
 </div>
+<div id="fórmula-del-idh" class="section level3">
+<h3>Fórmula del <code>IDH</code></h3>
+<p>El <code>IDH</code> se calcula como el promedio geométrico de los
+índices normalizados de estas tres dimensiones:<br />
+<span class="math display">\[
+    IDH = \sqrt[3]{I_{\text{salud}} \cdot I_{\text{educación}} \cdot
+I_{\text{ingreso}}}
+    \]</span></p>
+<p>Cada dimensión se normaliza en una escala de <span class="math inline">\(0\)</span> a <span class="math inline">\(1\)</span>, utilizando valores mínimos y máximos
+predefinidos, lo que permite comparar diferentes regiones o países.</p>
 </div>
-<div id="cálculo-del-subíndice-de-educación-2020" class="section level2">
-<h2>Cálculo del subíndice de Educación 2020</h2>
-<div id="recolección-de-datos" class="section level3">
-<h3>Recolección de datos</h3>
+<div id="cálculo-del-subíndice-de-educación" class="section level3">
+<h3>Cálculo del subíndice de Educación</h3>
+<p>El índice de educación combina dos subcomponentes: años promedio de
+escolaridad (<span class="math inline">\(AP\)</span>) y años esperados
+de escolarización (<span class="math inline">\(AE\)</span>):</p>
+<p><span class="math display">\[
+    I_{\text{educación}} = \frac{\sqrt{I_{AP} \cdot I_{AE}}}{1}
+    \]</span></p>
+<p>Donde:<br />
+<span class="math display">\[
+    I_{AP} = \frac{AP}{AP_{\text{max}}} \quad \text{e} \quad I_{AE} =
+\frac{AE}{AE_{\text{max}}}
+    \]</span></p>
+<ul>
+<li><span class="math inline">\(AP\)</span>: Años promedio de
+escolaridad.<br />
+</li>
+<li><span class="math inline">\(AE\)</span>: Años esperados de
+escolarización.<br />
+</li>
+<li><span class="math inline">\(AP_{\text{max}}\)</span>: Valor máximo
+de años promedio (15 años).<br />
+</li>
+<li><span class="math inline">\(AE_{\text{max}}\)</span>: Valor máximo
+de años esperados (18 años).</li>
+</ul>
+<div id="recolección-de-datos" class="section level4">
+<h4>Recolección de datos</h4>
 <p><strong>Valores máximos y mínimos de referencia:</strong></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>ae_maximo <span class="ot">=</span> <span class="dv">18</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>ape_maximo <span class="ot">=</span> <span class="dv">15</span></span></code></pre></div>
 </div>
-<div id="censo-de-población-y-vivienda-2020" class="section level3">
-<h3>Censo de Población y Vivienda 2020</h3>
+<div id="censo-de-población-y-vivienda-2020" class="section level4">
+<h4>Censo de Población y Vivienda 2020</h4>
 <p>Se utiliza la base completa de la muestra del Cuestionario Ampliado
 del Censo Consultar el Script <code>&quot;Censo 2020.Rmd&quot;</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">load</span>(<span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/Base Completa Censo de población y vivienda 2020.Rda&quot;</span>))</span></code></pre></div>
 </div>
-<div id="paso-1.-generación-de-nuevas-variables-previo-a-la-recodificación" class="section level3">
-<h3>Paso 1. Generación de nuevas variables, previo a la
-recodificación</h3>
+<div id="paso-1.-generación-de-nuevas-variables-previo-a-la-recodificación" class="section level4">
+<h4>Paso 1. Generación de nuevas variables, previo a la
+recodificación</h4>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>base_educacion <span class="ot">&lt;-</span> base_completa <span class="sc">%&gt;%</span> </span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>                   <span class="fu">mutate</span>(<span class="at">ASISTEN_R =</span> ASISTEN,</span>
 <span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>                          <span class="at">ESCOLARI_R =</span> <span class="fu">as.numeric</span>(ESCOLARI),</span>
 <span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>                          <span class="at">NIVACAD_R =</span> <span class="fu">as.numeric</span>(NIVACAD),</span>
 <span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>                          <span class="at">ESCOACUM_R =</span> <span class="fu">as.numeric</span>(ESCOACUM))</span></code></pre></div>
 </div>
-<div id="paso-2.-recodificación-de-los-años-de-escolaridad" class="section level3">
-<h3>Paso 2. Recodificación de los años de escolaridad</h3>
+<div id="paso-2.-recodificación-de-los-años-de-escolaridad" class="section level4">
+<h4>Paso 2. Recodificación de los años de escolaridad</h4>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>base_educacion <span class="ot">&lt;-</span> base_educacion <span class="sc">%&gt;%</span> </span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>                   <span class="fu">mutate</span>(<span class="at">anio =</span> <span class="fu">case_when</span>(.<span class="sc">$</span>NIVACAD_R <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>                                           .<span class="sc">$</span>NIVACAD_R <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
@@ -2016,17 +2067,17 @@ recodificación</h3>
 <span id="cb4-43"><a href="#cb4-43" tabindex="-1"></a>                                           .<span class="sc">$</span>NIVACAD_R <span class="sc">==</span> <span class="dv">14</span> <span class="sc">&amp;</span> .<span class="sc">$</span>ESCOLARI_R <span class="sc">&lt;</span> <span class="dv">99</span> <span class="sc">~</span> <span class="dv">18</span>,</span>
 <span id="cb4-44"><a href="#cb4-44" tabindex="-1"></a>                                           .<span class="sc">$</span>ESCOACUM <span class="sc">==</span> <span class="dv">99</span> <span class="sc">~</span> <span class="dv">99</span>))</span></code></pre></div>
 </div>
-<div id="paso-3-creación-de-identificadores-únicos" class="section level3">
-<h3>Paso 3: Creación de identificadores únicos</h3>
+<div id="paso-3-creación-de-identificadores-únicos" class="section level4">
+<h4>Paso 3: Creación de identificadores únicos</h4>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>base_educacion <span class="ot">&lt;-</span> base_educacion <span class="sc">%&gt;%</span> </span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>                   <span class="fu">mutate</span>(<span class="at">estado =</span> <span class="fu">str_pad</span>(.<span class="sc">$</span>ENT, <span class="at">width =</span> <span class="dv">2</span>, <span class="at">side =</span> <span class="fu">c</span>(<span class="st">&quot;left&quot;</span>), <span class="at">pad =</span> <span class="st">&quot;0&quot;</span>), </span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>                          <span class="at">municipio =</span> <span class="fu">str_pad</span>(.<span class="sc">$</span>MUN, <span class="at">width =</span> <span class="dv">3</span>, <span class="at">side =</span> <span class="fu">c</span>(<span class="st">&quot;left&quot;</span>), <span class="at">pad =</span> <span class="st">&quot;0&quot;</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">CVEGEO =</span> <span class="fu">paste0</span>(ENT, MUN))</span></code></pre></div>
 </div>
-<div id="paso-4-creación-del-índice-de-educación" class="section level3">
-<h3>Paso 4 CREACIÓN DEL ÍNDICE DE EDUCACIÓN</h3>
-<div id="paso-4a.-creación-de-los-años-promedio-de-escolaridad" class="section level4">
-<h4>Paso 4a. Creación de los años promedio de escolaridad</h4>
+<div id="paso-4-creación-del-índice-de-educación" class="section level4">
+<h4>Paso 4 CREACIÓN DEL ÍNDICE DE EDUCACIÓN</h4>
+<div id="paso-4a.-creación-de-los-años-promedio-de-escolaridad" class="section level5">
+<h5>Paso 4a. Creación de los años promedio de escolaridad</h5>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>base_educacion <span class="ot">&lt;-</span> base_educacion <span class="sc">%&gt;%</span> </span>
 <span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>                   <span class="fu">mutate</span>(<span class="at">edad_m =</span> <span class="fu">ifelse</span>(EDAD <span class="sc">==</span> <span class="dv">999</span>, <span class="cn">NA</span>, EDAD)) <span class="sc">%&gt;%</span> </span>
 <span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">rango_anios =</span> <span class="fu">ifelse</span>(anio <span class="sc">&lt;</span> <span class="dv">99</span>, <span class="dv">1</span>, <span class="dv">0</span>))</span>
@@ -2036,9 +2087,9 @@ recodificación</h3>
 <span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>                    <span class="fu">group_by</span>(estado, CVEGEO, municipio) <span class="sc">%&gt;%</span> </span>
 <span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>                     <span class="fu">summarise</span>(<span class="at">anios =</span> <span class="fu">weighted.mean</span>(anio, FACTOR))</span></code></pre></div>
 </div>
-<div id="paso-4b.-creación-de-la-tasa-de-matriculación-y-de-los-años-esperados" class="section level4">
-<h4>Paso 4b. Creación de la tasa de matriculación y de los años
-esperados</h4>
+<div id="paso-4b.-creación-de-la-tasa-de-matriculación-y-de-los-años-esperados" class="section level5">
+<h5>Paso 4b. Creación de la tasa de matriculación y de los años
+esperados</h5>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>base_educacion <span class="ot">&lt;-</span> base_educacion <span class="sc">%&gt;%</span> </span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>                   <span class="fu">mutate</span>(<span class="at">asistencia =</span> <span class="fu">case_when</span>(.<span class="sc">$</span>ASISTEN <span class="sc">==</span> <span class="dv">1</span> <span class="sc">~</span> <span class="dv">1</span>,</span>
 <span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>                                                 .<span class="sc">$</span>ASISTEN <span class="sc">==</span> <span class="dv">3</span> <span class="sc">~</span> <span class="dv">0</span>,</span>
@@ -2058,15 +2109,15 @@ esperados</h4>
 <span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>                            <span class="fu">mutate</span>(<span class="at">aesperados =</span> <span class="fu">sum</span>(tm)) <span class="sc">%&gt;%</span> </span>
 <span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>                             <span class="fu">arrange</span>(CVEGEO)</span></code></pre></div>
 </div>
-<div id="paso-4c.-pegado-de-las-bases-de-datos-para-generar-el-índice" class="section level4">
-<h4>Paso 4c. Pegado de las bases de datos para generar el índice</h4>
+<div id="paso-4c.-pegado-de-las-bases-de-datos-para-generar-el-índice" class="section level5">
+<h5>Paso 4c. Pegado de las bases de datos para generar el índice</h5>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>base_IE2020 <span class="ot">&lt;-</span> tasa_matriculacion <span class="sc">%&gt;%</span> </span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>                <span class="fu">select</span>(CVEGEO, aesperados) <span class="sc">%&gt;%</span></span>
 <span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>                 <span class="fu">unique</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>                  <span class="fu">inner_join</span>(., anios_promedio, <span class="at">by =</span> <span class="st">&quot;CVEGEO&quot;</span>)</span></code></pre></div>
 </div>
-<div id="paso-4d.-creación-de-los-índices" class="section level4">
-<h4>Paso 4d. Creación de los índices</h4>
+<div id="paso-4d.-creación-de-los-índices" class="section level5">
+<h5>Paso 4d. Creación de los índices</h5>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>POB20 <span class="ot">&lt;-</span> readxl<span class="sc">::</span><span class="fu">read_excel</span>(<span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/Población 2020.xlsx&quot;</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">CVEGEO =</span> <span class="fu">sprintf</span>(<span class="st">&quot;%05d&quot;</span>, Clave)) <span class="sc">%&gt;%</span> </span>
 <span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>           <span class="fu">rename</span>(<span class="at">pob20 =</span> poblacion2020) <span class="sc">%&gt;%</span>  </span>
@@ -2085,10 +2136,22 @@ esperados</h4>
 </div>
 </div>
 </div>
-<div id="cálculo-del-subíndice-de-ingreso-2020" class="section level2">
-<h2>Cálculo del subíndice de Ingreso 2020</h2>
-<div id="paso-1-recolección-de-datos-externos" class="section level3">
-<h3>Paso 1: Recolección de datos externos</h3>
+<div id="cálculo-del-subíndice-de-ingreso" class="section level3">
+<h3>Cálculo del subíndice de Ingreso</h3>
+<p><span class="math display">\[
+    I_{\text{ingreso}} = \frac{\ln(\text{INB}) -
+\ln(\text{INB}_{\text{min}})}{\ln(\text{INB}_{\text{max}}) -
+\ln(\text{INB}_{\text{min}})}
+    \]</span></p>
+<p>Donde:<br />
+- <span class="math inline">\(\text{INB}\)</span>: Ingreso nacional
+bruto per cápita ajustado por paridad de poder adquisitivo (PPA).<br />
+- <span class="math inline">\(\text{INB}_{\text{min}}\)</span>: Valor
+mínimo ($100 USD).<br />
+- <span class="math inline">\(\text{INB}_{\text{max}}\)</span>: Valor
+máximo ($75,000 USD).</p>
+<div id="paso-1-recolección-de-datos-externos" class="section level4">
+<h4>Paso 1: Recolección de datos externos</h4>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>inpc_DIC2015 <span class="ot">=</span> <span class="fl">89.046818</span></span>
 <span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>inpc_NOV2020 <span class="ot">=</span> <span class="fl">109.271</span> </span>
 <span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>inb20 <span class="ot">=</span> <span class="fl">22644301.694</span></span>
@@ -2098,8 +2161,8 @@ esperados</h4>
 <span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>ing_minimo <span class="ot">=</span> <span class="dv">100</span></span>
 <span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co">#Revisar anexo &quot;Indicadores de referencia IDH&quot;</span></span></code></pre></div>
 </div>
-<div id="paso-2-reordenar-las-bases-de-datos" class="section level3">
-<h3>Paso 2: Reordenar las bases de datos</h3>
+<div id="paso-2-reordenar-las-bases-de-datos" class="section level4">
+<h4>Paso 2: Reordenar las bases de datos</h4>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>ictpc_20 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/ICTP2020_CONEVAL.xlsx&quot;</span>), <span class="at">skip =</span> <span class="dv">1</span>) </span>
 <span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="fu">colnames</span>(ictpc_20) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;CVE_ENT&quot;</span>,</span>
@@ -2127,8 +2190,8 @@ esperados</h4>
 <span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="co"># 29048 La Magdalena Tlaltelulco, TLX</span></span>
 <span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co"># 04012 Seybaplaya, CAM</span></span></code></pre></div>
 </div>
-<div id="paso3.-índice-de-ingreso-2020" class="section level3">
-<h3>Paso3. Índice de ingreso 2020</h3>
+<div id="paso3.-índice-de-ingreso-2020" class="section level4">
+<h4>Paso3. Índice de ingreso 2020</h4>
 <p><strong>Paso 1. Cambio del ICTPC a precios de diciembre de 2015 para
 mantener la comparación de la serie (2010-2020)</strong></p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>ajuste_inpc <span class="ot">&lt;-</span> inpc_DIC2015 <span class="sc">/</span> inpc_NOV2020</span></code></pre></div>
@@ -2165,16 +2228,27 @@ conversión de PPA con respecto al dólar estadounidense,</strong></p>
 <span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>                 <span class="fu">rename</span>(<span class="at">pob20 =</span> POB20)</span></code></pre></div>
 </div>
 </div>
-<div id="cálculo-del-subíndice-de-salud-2020" class="section level2">
-<h2>Cálculo del Subíndice de Salud 2020</h2>
-<div id="paso-1.-valores-máximos-y-mínimos-de-referencia" class="section level3">
-<h3>Paso 1. Valores máximos y mínimos de referencia:</h3>
+<div id="cálculo-del-subíndice-de-salud" class="section level3">
+<h3>Cálculo del Subíndice de Salud</h3>
+<p><span class="math display">\[
+    I_{\text{salud}} = \frac{\text{EV} -
+\text{EV}_{\text{min}}}{\text{EV}_{\text{max}} - \text{EV}_{\text{min}}}
+    \]</span><br />
+Donde:<br />
+- <span class="math inline">\(\text{EV}\)</span>: Esperanza de vida al
+nacer.<br />
+- <span class="math inline">\(\text{EV}_{\text{min}}\)</span>: Valor
+mínimo (20 años).<br />
+- <span class="math inline">\(\text{EV}_{\text{max}}\)</span>: Valor
+máximo (85 años).</p>
+<div id="paso-1.-valores-máximos-y-mínimos-de-referencia" class="section level4">
+<h4>Paso 1. Valores máximos y mínimos de referencia:</h4>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>tmi_minima <span class="ot">=</span> <span class="fl">1.54</span> </span>
 <span id="cb26-2"><a href="#cb26-2" tabindex="-1"></a>tmi_maxima <span class="ot">=</span> <span class="fl">80.10</span> </span></code></pre></div>
 </div>
-<div id="paso-2.-acomodo-de-las-bases-de-datos-para-el-cálculo-de-la-tasa-de-mortalidad-infantil-tmi." class="section level3">
-<h3>Paso 2. acomodo de las bases de datos para el cálculo de la Tasa de
-Mortalidad Infantil (TMI).</h3>
+<div id="paso-2.-acomodo-de-las-bases-de-datos-para-el-cálculo-de-la-tasa-de-mortalidad-infantil-tmi." class="section level4">
+<h4>Paso 2. acomodo de las bases de datos para el cálculo de la Tasa de
+Mortalidad Infantil (TMI).</h4>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>TMI_20<span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/TMI2020_CONAPO.xlsx&quot;</span>), <span class="at">sheet =</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
 <span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">TMI_2020 =</span> <span class="fu">as.numeric</span>(TMI_2020))</span></code></pre></div>
 <p><strong>NOTA:</strong> Las poblaciones utilizadas para el cálculo de
@@ -2184,8 +2258,8 @@ de Población y Vivienda 2020</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>POB20 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/Población 2020 (CONAPO).xlsx&quot;</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">CVEGEO =</span> <span class="fu">sprintf</span>(<span class="st">&quot;%05d&quot;</span>, CVEGEO)) <span class="sc">%&gt;%</span> </span>
 <span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>           <span class="fu">select</span>(CVEGEO, poblacion2020)</span></code></pre></div>
-<div id="regionalización" class="section level4">
-<h4>Regionalización</h4>
+<div id="regionalización" class="section level5">
+<h5>Regionalización</h5>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># cálculo de las poblaciones por región en Oaxaca</span></span>
 <span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>regs_oax <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/Regionalizacion_OAX.xlsx&quot;</span>)) <span class="sc">%&gt;%</span> </span>
 <span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a>             <span class="fu">mutate</span>(<span class="at">CVEGEO =</span> <span class="fu">sprintf</span>(<span class="st">&quot;%05d&quot;</span>, CVEGEO))</span></code></pre></div>
@@ -2204,8 +2278,8 @@ de Población y Vivienda 2020</p>
 <span id="cb31-6"><a href="#cb31-6" tabindex="-1"></a>               <span class="fu">select</span>(<span class="sc">-</span><span class="fu">contains</span>(<span class="st">&quot;DIST&quot;</span>), <span class="sc">-</span>poblacion2020)</span></code></pre></div>
 </div>
 </div>
-<div id="paso-3.-índice-de-salud-2020" class="section level3">
-<h3>Paso 3. Índice de Salud 2020</h3>
+<div id="paso-3.-índice-de-salud-2020" class="section level4">
+<h4>Paso 3. Índice de Salud 2020</h4>
 <p><strong>Paso 1. Expresar la Tasa de mortalidad infantil (TMI)
 municipal, en términos de SI</strong></p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a>TMI_20<span class="sc">$</span>SI_2020 <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> (TMI_20<span class="sc">$</span>TMI_2020 <span class="sc">/</span> <span class="dv">1000</span>)</span></code></pre></div>
@@ -2221,12 +2295,16 @@ municipal, en términos de SI</strong></p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="fu">write_xlsx</span>(base_IS2020, <span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/RESULTADOS SS 2020.xlsx&quot;</span>))</span></code></pre></div>
 </div>
 </div>
-<div id="idh-2020" class="section level2">
-<h2>IDH 2020</h2>
-<p>Dado que los subíndices de ingreso y educación se tienen a nivel
-municipio en Oxaca, pero el subíndice de salud, únicamente se calculó a
-nivel distrito, se homologan todos los subíndices a nivel distrito para
-Oaxaca.</p>
+<div id="idh-2020" class="section level3">
+<h3>IDH 2020</h3>
+<p>Una vez calculados los tres índices, el IDH se obtiene como el
+promedio geométrico:<br />
+<span class="math display">\[
+    IDH = \sqrt[3]{I_{\text{salud}} \cdot I_{\text{educación}} \cdot
+I_{\text{ingreso}}}
+    \]</span></p>
+<p>Estas fórmulas permiten normalizar cada componente y garantizar
+comparabilidad entre regiones o países.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a>indices_oax <span class="ot">&lt;-</span> base_II2020 <span class="sc">%&gt;%</span> </span>
 <span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>                <span class="fu">full_join</span>(., base_IE2020) <span class="sc">%&gt;%</span> </span>
 <span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a>                 <span class="fu">filter</span>(CVE_ENT <span class="sc">==</span> <span class="st">&quot;20&quot;</span>) <span class="sc">%&gt;%</span> </span>
@@ -2240,6 +2318,10 @@ Oaxaca.</p>
 <span id="cb37-11"><a href="#cb37-11" tabindex="-1"></a>                              <span class="at">pob20     =</span> <span class="fu">sum</span>(pob20)) <span class="sc">%&gt;%</span> </span>
 <span id="cb37-12"><a href="#cb37-12" tabindex="-1"></a>                                           <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span> </span>
 <span id="cb37-13"><a href="#cb37-13" tabindex="-1"></a>                                            <span class="fu">mutate</span>(<span class="at">CVEGEO =</span> <span class="fu">as.character</span>(CVE_DIST))</span></code></pre></div>
+<p>Dado que los subíndices de ingreso y educación se tienen a nivel
+municipio en Oxaca, pero el subíndice de salud, únicamente se calculó a
+nivel distrito, se homologan todos los subíndices a nivel distrito para
+Oaxaca.</p>
 <p><strong>IDH para el estado de Oaxaca (nivel distritos)</strong></p>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a>idh_oax <span class="ot">&lt;-</span> base_IS2020 <span class="sc">%&gt;%</span> </span>
 <span id="cb38-2"><a href="#cb38-2" tabindex="-1"></a>            <span class="fu">filter</span>(CVE_ENT <span class="sc">==</span> <span class="st">&quot;20&quot;</span>) <span class="sc">%&gt;%</span> </span>
@@ -2257,6 +2339,7 @@ municipio)</strong></p>
 <span id="cb39-6"><a href="#cb39-6" tabindex="-1"></a>                  <span class="fu">rename</span>(<span class="at">ICTPC2020 =</span> ICTPC20)</span></code></pre></div>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a>idh_2020 <span class="ot">&lt;-</span> <span class="fu">full_join</span>(idh_oax, idh_resto)</span></code></pre></div>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r fold-show"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="fu">write_xlsx</span>(idh_2020, <span class="fu">paste0</span>(here<span class="sc">::</span><span class="fu">here</span>(), <span class="st">&quot;/Bases/RESULTADOS IDH 2020.xlsx&quot;</span>))</span></code></pre></div>
+</div>
 </div>
 <div id="referencias" class="section level2">
 <h2>Referencias</h2>
@@ -2529,7 +2612,7 @@ $(document).ready(function ()  {
 
     // establish options
     var options = {
-      selectors: "h1,h2",
+      selectors: "h1,h2,h3",
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {

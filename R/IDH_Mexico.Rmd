@@ -9,7 +9,7 @@ output:
       highlight: tango
       theme: flatly
       toc: yes
-      toc_depth: 2
+      toc_depth: 3
       toc_float:
         collapsed: yes
 ---
@@ -55,6 +55,7 @@ En México, el IDH ha sido una herramienta clave para analizar las desigualdades
   <figcaption>Fuente: Informe del Desarrollo Humano 2020, (PNUD).</figcaption>
 </figure>  
 
+</br>
 
 México ha mantenido un nivel de desarrollo humano clasificado como "alto" según los estándares del `PNUD`, aunque está por debajo del promedio de los países más desarrollados. Entre 1990 y 2022, el IDH de México ha crecido de manera sostenida, impulsado principalmente por mejoras en la esperanza de vida y la ampliación del acceso a la educación. Sin embargo, el crecimiento económico, aunque positivo, ha sido moderado y desigual, limitando el impacto de esta dimensión en el índice general.   
 
@@ -69,9 +70,48 @@ Existen marcadas diferencias en el `IDH` entre las entidades federativas y regio
   <figcaption>Fuente: Informe del Desarrollo Humano municipal 2010 - 2020, (PNUD).</figcaption>
 </figure>  
 
-##  Cálculo del subíndice de Educación 2020          
+</br>
 
-### Recolección de datos
+**Estrategias** 
+
+Para abordar estas desigualdades, las estrategias gubernamentales y el PNUD han destacado como prioritario:
+
+- Invertir en educación de calidad, especialmente en las regiones más rezagadas.
+- Implementar políticas de salud inclusivas y efectivas.
+- Fortalecer programas contra la pobreza con enfoques específicos por territorio y población.
+- Impulsar la creación de empleos formales y bien remunerados. 
+
+El Índice de Desarrollo Humano (IDH), desarrollado por el Programa de las Naciones Unidas para el Desarrollo (PNUD), es una medida compuesta que evalúa el bienestar y el progreso humano en tres dimensiones clave:
+
+### Fórmula del `IDH`   
+
+El `IDH` se calcula como el promedio geométrico de los índices normalizados de estas tres dimensiones:  
+  \[
+    IDH = \sqrt[3]{I_{\text{salud}} \cdot I_{\text{educación}} \cdot I_{\text{ingreso}}}
+    \]
+
+Cada dimensión se normaliza en una escala de $0$ a $1$, utilizando valores mínimos y máximos predefinidos, lo que permite comparar diferentes regiones o países.  
+
+###  Cálculo del subíndice de Educación     
+
+El índice de educación combina dos subcomponentes: años promedio de escolaridad (\(AP\)) y años esperados de escolarización (\(AE\)):  
+  
+  \[
+    I_{\text{educación}} = \frac{\sqrt{I_{AP} \cdot I_{AE}}}{1}
+    \]  
+
+Donde:  
+  \[
+    I_{AP} = \frac{AP}{AP_{\text{max}}} \quad \text{e} \quad I_{AE} = \frac{AE}{AE_{\text{max}}}
+    \]
+
+- \(AP\): Años promedio de escolaridad.  
+- \(AE\): Años esperados de escolarización.  
+- \(AP_{\text{max}}\): Valor máximo de años promedio (15 años).  
+- \(AE_{\text{max}}\): Valor máximo de años esperados (18 años).  
+
+
+#### Recolección de datos
 
 **Valores máximos y mínimos de referencia:** 
 
@@ -81,7 +121,7 @@ ape_maximo = 15
 ```
 
 
-### Censo de Población y Vivienda 2020
+#### Censo de Población y Vivienda 2020
 
 Se utiliza la base completa de la muestra del Cuestionario Ampliado del Censo
 Consultar el Script `"Censo 2020.Rmd"`.
@@ -92,7 +132,7 @@ load(paste0(here::here(), "/Bases/Base Completa Censo de población y vivienda 2
 ```
 
 
-### Paso 1. Generación de nuevas variables, previo a la recodificación
+#### Paso 1. Generación de nuevas variables, previo a la recodificación
 
 ```{r}
 base_educacion <- base_completa %>% 
@@ -102,7 +142,7 @@ base_educacion <- base_completa %>%
                           ESCOACUM_R = as.numeric(ESCOACUM))
 ```
 
-###  Paso 2. Recodificación de los años de escolaridad
+####  Paso 2. Recodificación de los años de escolaridad
  
 ```{r}
 base_educacion <- base_educacion %>% 
@@ -151,7 +191,7 @@ base_educacion <- base_educacion %>%
                                            .$ESCOACUM == 99 ~ 99))
 ```
 
-### Paso 3: Creación de identificadores únicos  
+#### Paso 3: Creación de identificadores únicos  
 
 ```{r}
 base_educacion <- base_educacion %>% 
@@ -161,9 +201,9 @@ base_educacion <- base_educacion %>%
 ```
 
 
-### Paso 4 CREACIÓN DEL ÍNDICE DE EDUCACIÓN   
+#### Paso 4 CREACIÓN DEL ÍNDICE DE EDUCACIÓN   
 
-#### Paso 4a. Creación de los años promedio de escolaridad  
+##### Paso 4a. Creación de los años promedio de escolaridad  
 
 ```{r}
 base_educacion <- base_educacion %>% 
@@ -177,7 +217,7 @@ anios_promedio <- base_educacion %>%
 ```
 
 
-#### Paso 4b. Creación de la tasa de matriculación y de los años esperados   
+##### Paso 4b. Creación de la tasa de matriculación y de los años esperados   
 
 ```{r}
 base_educacion <- base_educacion %>% 
@@ -203,7 +243,7 @@ tasa_matriculacion <- base_educacion %>%
                              arrange(CVEGEO)
 ```
 
-#### Paso 4c. Pegado de las bases de datos para generar el índice
+##### Paso 4c. Pegado de las bases de datos para generar el índice
 
 ```{r}
 base_IE2020 <- tasa_matriculacion %>% 
@@ -214,7 +254,7 @@ base_IE2020 <- tasa_matriculacion %>%
 
 
 
-#### Paso 4d. Creación de los índices
+##### Paso 4d. Creación de los índices
 
 ```{r}
 POB20 <- readxl::read_excel(paste0(here::here(), "/Bases/Población 2020.xlsx")) %>% 
@@ -241,9 +281,19 @@ base_IE2020 <- base_IE2020 %>%
 writexl::write_xlsx(base_IE2020, paste0(here::here(), "/Bases/RESULTADOS SE 2020.xlsx"))
 ```
 
-## Cálculo del subíndice de Ingreso 2020     
+### Cálculo del subíndice de Ingreso     
 
-### Paso 1: Recolección de datos externos 
+\[
+    I_{\text{ingreso}} = \frac{\ln(\text{INB}) - \ln(\text{INB}_{\text{min}})}{\ln(\text{INB}_{\text{max}}) - \ln(\text{INB}_{\text{min}})}
+    \]
+
+Donde:  
+  - \(\text{INB}\): Ingreso nacional bruto per cápita ajustado por paridad de poder adquisitivo (PPA).  
+- \(\text{INB}_{\text{min}}\): Valor mínimo (\$100 USD).  
+- \(\text{INB}_{\text{max}}\): Valor máximo (\$75,000 USD).  
+
+
+#### Paso 1: Recolección de datos externos 
 
 ```{r}
 inpc_DIC2015 = 89.046818
@@ -259,7 +309,7 @@ ing_minimo = 100
 #Revisar anexo "Indicadores de referencia IDH"
 ```
 
-### Paso 2: Reordenar las bases de datos   
+#### Paso 2: Reordenar las bases de datos   
 
 ```{r}
 ictpc_20 <- read_excel(paste0(here::here(), "/Bases/ICTP2020_CONEVAL.xlsx"), skip = 1) 
@@ -294,7 +344,7 @@ ictpc_20 <- ictpc_20 %>%
 # 04012 Seybaplaya, CAM
 ```
 
-###  Paso3. Índice de ingreso 2020  
+####  Paso3. Índice de ingreso 2020  
 
 **Paso 1. Cambio del ICTPC  a precios de diciembre de 2015 para mantener la comparación de la serie (2010-2020)**
 
@@ -368,17 +418,27 @@ base_II2020 <- II_2020 %>%
 ```
 
 
-## Cálculo del Subíndice de Salud 2020    
+### Cálculo del Subíndice de Salud      
+
+\[
+    I_{\text{salud}} = \frac{\text{EV} - \text{EV}_{\text{min}}}{\text{EV}_{\text{max}} - \text{EV}_{\text{min}}}
+    \]  
+Donde:  
+  - \(\text{EV}\): Esperanza de vida al nacer.  
+- \(\text{EV}_{\text{min}}\): Valor mínimo (20 años).  
+- \(\text{EV}_{\text{max}}\): Valor máximo (85 años).  
 
 
-### Paso 1. Valores máximos y mínimos de referencia: 
+
+
+#### Paso 1. Valores máximos y mínimos de referencia: 
 
 ```{r}
 tmi_minima = 1.54 
 tmi_maxima = 80.10 
 ```
 
-### Paso 2. acomodo de las bases de datos para el cálculo de la Tasa de Mortalidad Infantil (TMI). 
+#### Paso 2. acomodo de las bases de datos para el cálculo de la Tasa de Mortalidad Infantil (TMI). 
 
 ```{r}
 TMI_20<- read_excel(paste0(here::here(), "/Bases/TMI2020_CONAPO.xlsx"), sheet = 1) %>% 
@@ -393,7 +453,7 @@ POB20 <- read_excel(paste0(here::here(), "/Bases/Población 2020 (CONAPO).xlsx")
            select(CVEGEO, poblacion2020)
 ```
 
-#### Regionalización 
+##### Regionalización 
 
 ```{r}
 # cálculo de las poblaciones por región en Oaxaca
@@ -420,7 +480,7 @@ TMI_20 <- TMI_20 %>%
                select(-contains("DIST"), -poblacion2020)
 ```
 
-### Paso 3. Índice de Salud 2020  
+#### Paso 3. Índice de Salud 2020  
 
 **Paso 1. Expresar la Tasa de mortalidad infantil (TMI) municipal, en términos de SI**   
 
@@ -456,9 +516,17 @@ write_xlsx(base_IS2020, paste0(here::here(), "/Bases/RESULTADOS SS 2020.xlsx"))
 ```
 
 
-## IDH 2020    
+### IDH 2020    
 
-Dado que los subíndices de ingreso y educación se tienen a nivel municipio en Oxaca, pero el subíndice de salud, únicamente se calculó a nivel distrito, se homologan todos los subíndices a nivel distrito para Oaxaca.   
+
+
+Una vez calculados los tres índices, el IDH se obtiene como el promedio geométrico:  
+  \[
+    IDH = \sqrt[3]{I_{\text{salud}} \cdot I_{\text{educación}} \cdot I_{\text{ingreso}}}
+    \]
+
+Estas fórmulas permiten normalizar cada componente y garantizar comparabilidad entre regiones o países.
+
 
 ```{r}
 indices_oax <- base_II2020 %>% 
@@ -475,6 +543,9 @@ indices_oax <- base_II2020 %>%
                                            ungroup() %>% 
                                             mutate(CVEGEO = as.character(CVE_DIST))
 ```
+
+Dado que los subíndices de ingreso y educación se tienen a nivel municipio en Oxaca, pero el subíndice de salud, únicamente se calculó a nivel distrito, se homologan todos los subíndices a nivel distrito para Oaxaca.   
+
 **IDH para el estado de Oaxaca (nivel distritos)** 
 
 ```{r}
