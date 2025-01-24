@@ -12,6 +12,17 @@ municipios de México. El IDH es una medida compuesta que evalúa el
 bienestar humano considerando tres dimensiones fundamentales: salud,
 educación y nivel de vida digno.
 
+<figure>
+
+<img src="../Output/IDH_Mapa.jpg" style="width:75%;"/>
+
+<figcaption>
+Fuente: Informe del Desarrollo Humano 2020, (PNUD).
+</figcaption>
+</figure>
+
+</br>
+
 ## Composición del IDH
 
 El IDH se calcula como el promedio geométrico de tres índices que
@@ -22,8 +33,8 @@ representan las dimensiones clave del desarrollo humano:
 Este índice mide la calidad y longevidad de vida. - **Fórmula:**
 
 $$
-  I_{\text{salud}} = \frac{\text{EV} - \text{EV}_{\text{min}}}{\text{EV}_{\text{max}} - \text{EV}_{\text{min}}}
-  $$
+I_{\text{salud}} = \frac{\text{EV} - \text{EV}_{\text{min}}}{\text{EV}_{\text{max}} - \text{EV}_{\text{min}}}
+ $$
 
 Donde:  
 - $\text{EV}$: Esperanza de vida al nacer.  
@@ -73,28 +84,14 @@ $$
 
 ## 📊 Análisis a Nivel Municipal
 
-En este repositorio se analiza el IDH para los 2,456 municipios de
-México. Esto incluye: - Comparación de las dimensiones del IDH entre
-municipios. - Identificación de disparidades regionales en salud,
-educación e ingreso. - Visualizaciones gráficas y mapas temáticos que
-ilustran las desigualdades.
-
-## 📦 Tecnologías y Herramientas
-
-Este análisis utiliza: - **Lenguaje:** R - **Paqueterías clave:** -
-`dplyr` para manipulación de datos. - `ggplot2` para visualizaciones. -
-`sf` y `leaflet` para análisis espacial y mapeo.
-
-## 🔗 Estructura del Repositorio
-
-- `data/`: Datos utilizados para el cálculo del IDH.
-- `scripts/`: Código fuente para el análisis.
-- `visualizations/`: Gráficos y mapas generados.
-
-## 🔄 Contribución
-
-Se invita a los usuarios a contribuir al repositorio para enriquecer el
-análisis. Cualquier mejora o sugerencia es bienvenida.
+En este repositorio se analiza el IDH para los 2,459 municipios de
+México para el 2020.  
+Esto incluye:  
+- Comparación de las dimensiones del IDH entre municipios.  
+- Identificación de disparidades regionales en salud, educación e
+ingreso.  
+- Visualizaciones gráficas y mapas temáticos que ilustran las
+desigualdades.
 
 ## 📈 Resultados Clave
 
