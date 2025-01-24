@@ -32,9 +32,7 @@ representan las dimensiones clave del desarrollo humano:
 
 Este índice mide la calidad y longevidad de vida. - **Fórmula:**
 
-$$
-I_{\text{salud}} = \frac{\text{EV} - \text{EV}_{\text{min}}}{\text{EV}_{\text{max}} - \text{EV}_{\text{min}}}
- $$
+$$I_{\text{salud}} = \frac{\text{EV} - \text{EV}_{\text{min}}}{\text{EV}_{\text{max}} - \text{EV}_{\text{min}}}$$
 
 Donde:  
 - $\text{EV}$: Esperanza de vida al nacer.  
