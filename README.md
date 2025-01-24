@@ -21,8 +21,6 @@ Fuente: Informe del Desarrollo Humano 2020, (PNUD).
 </figcaption>
 </figure>
 
-</br>
-
 ## Composición del IDH
 
 El IDH se calcula como el promedio geométrico de tres índices que
@@ -35,7 +33,7 @@ Este índice mide la calidad y longevidad de vida.
 **Fórmula:**
 
 $$
- I_{\text{salud}} = \frac{\text{EV} - \text{EV}_{\text{min}}}{\text{EV}_{\text{max}} - \text{EV}_{\text{min}}}
+ I_{salud} = \frac{\text{EV} - \text{EV}_{\text{min}}}{\text{EV}_{\text{max}} - \text{EV}_{\text{min}}}
  $$
 
 Donde:  
