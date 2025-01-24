@@ -14,7 +14,7 @@ educación y nivel de vida digno.
 
 <figure>
 
-<img src="../Output/IDH_Mapa.jpg" style="width:75%;"/>
+<img src="https://github.com/dvillasanao/IDH_Mexico/blob/main/Output/IDH_Mapa.jpg?raw=true" style="width:75%;"/>
 
 <figcaption>
 Fuente: Informe del Desarrollo Humano 2020, (PNUD).
@@ -30,9 +30,13 @@ representan las dimensiones clave del desarrollo humano:
 
 ### 1. Salud: Índice de Esperanza de Vida (IEV)
 
-Este índice mide la calidad y longevidad de vida. - **Fórmula:**
+Este índice mide la calidad y longevidad de vida.
 
-$$I_{\text{salud}} = \frac{\text{EV} - \text{EV}_{\text{min}}}{\text{EV}_{\text{max}} - \text{EV}_{\text{min}}}$$
+**Fórmula:**
+
+$$
+ I_{\text{salud}} = \frac{\text{EV} - \text{EV}_{\text{min}}}{\text{EV}_{\text{max}} - \text{EV}_{\text{min}}}
+ $$
 
 Donde:  
 - $\text{EV}$: Esperanza de vida al nacer.  
@@ -42,7 +46,9 @@ Donde:
 ### 2. Educación: Índice de Educación (IE)
 
 Este índice combina los años promedio de escolaridad y los años
-esperados de escolarización. - **Fórmulas:**
+esperados de escolarización.
+
+**Fórmulas:**
 
 $$
   I_{\text{educación}} = \sqrt{I_{AP} \cdot I_{AE}}
@@ -60,7 +66,9 @@ $AE$: Años esperados de escolarización.
 ### 3. Nivel de Vida: Índice de Ingreso (II)
 
 Este índice refleja el acceso a recursos económicos necesarios para una
-vida digna. - **Fórmula:**
+vida digna.
+
+**Fórmula:**
 
 $$
   I_{\text{ingreso}} = \frac{\ln(\text{INB}) - \ln(\text{INB}_{\text{min}})}{\ln(\text{INB}_{\text{max}}) - \ln(\text{INB}_{\text{min}})}
@@ -101,8 +109,10 @@ desigualdades.
 
 ## 📖 Referencias
 
-- Programa de las Naciones Unidas para el Desarrollo (PNUD). “Índice de
-  Desarrollo Humano Municipal en México: nueva metodología” (2014).
+- Informe de Desarrollo Humano Municipal 2010-2020: una década de
+  transformaciones locales en México \| Programa De Las Naciones Unidas
+  Para El Desarrollo. (2023). Retrieved January 19, 2025, from
+  <https://www.undp.org/es/mexico/publicaciones/informe-de-desarrollo-humano-municipal-2010-2020-una-decada-de-transformaciones-locales-en-mexico-0>
 
 ------------------------------------------------------------------------
 
