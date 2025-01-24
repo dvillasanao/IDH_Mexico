@@ -107,6 +107,16 @@ desigualdades.
   en regiones urbanas, mientras que los más rezagados se encuentran en
   áreas rurales e indígenas.
 
+## Enlaces
+
+- Indicadores clave utilizando el Censo de Población y Vivienda 2020
+
+**Enlace**: <https://dvillasanao.github.io/IDH_Mexico/R/Censo-2020.html>
+
+- Cálculo del Índice del Desarrollo Humano (IDH) 2020
+
+**Enlace**: <https://dvillasanao.github.io/IDH_Mexico/R/IDH_Mexico.html>
+
 ## 📖 Referencias
 
 - Informe de Desarrollo Humano Municipal 2010-2020: una década de
