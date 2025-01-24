@@ -90,7 +90,7 @@ $$
 
 ## 📊 Análisis a Nivel Municipal
 
-En este repositorio se analiza el IDH para los 2,459 municipios de
+En este repositorio se analiza el IDH para los 2,469 municipios de
 México para el 2020.  
 Esto incluye:  
 - Comparación de las dimensiones del IDH entre municipios.  
